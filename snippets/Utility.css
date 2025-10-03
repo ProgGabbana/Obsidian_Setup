@@ -1,0 +1,20 @@
+/* Nasconde i file */
+div[data-path$='.aux'],
+div[data-path$='.exe'],
+div[data-path$='.log'],
+div[data-path$='.toc'],
+div[data-path$='.lof'],
+div[data-path$='.lot'],
+div[data-path$='.bbl'],
+div[data-path$='.bib'],
+div[data-path$='.blg'],
+div[data-path$='.out'],
+div[data-path$='.fls'],
+div[data-path$='.fdb_latexmk'],
+div[data-path$='.synctex.gz'],
+div[data-path$='.dvi'],
+div[data-path$='.ps'],
+div[data-path$='.xml'],
+div[data-path$='.xmpi'] {
+    display: none;
+}

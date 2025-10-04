@@ -1,43 +1,43 @@
 body {
-    --image-border-color: #cccccc; 
-    --image-border-width: 1px; 
-    --image-border-padding: 8px; 
-    --image-border-background: #f0f0f0; 
+    --image-border-color: #cccccc;
+    --image-border-width: 1px;
+    --image-border-padding: 8px;
+    --image-border-background: #f0f0f0;
 
-    --micro: 70px; 
-    --tiny: 100px; 
-    --small: 200px; 
-    --small-med: 300px; 
-    --med-small: 400px; 
-    --medium: 500px; 
-    --med-tall: 600px; 
-    --tall: 700px; 
+    --micro: 70px;
+    --tiny: 100px;
+    --small: 200px;
+    --small-med: 300px;
+    --med-small: 400px;
+    --medium: 500px;
+    --med-tall: 600px;
+    --tall: 700px;
 
-    --list-min-width: 200px; 
-    --list-grid-min-width: 250px; 
-    --list-grid-wide-min-width: 350px; 
-    
-    --callout-min-width: 200px; 
-    --callout-gap: 1em; 
-    --callout-margin: 0px; 
-    
+    --list-min-width: 200px;
+    --list-grid-min-width: 250px;
+    --list-grid-wide-min-width: 350px;
+
+    --callout-min-width: 200px;
+    --callout-gap: 1em;
+    --callout-margin: 0px;
+
     --float-small-width: 300px;
     --float-medium-width: 400px;
     --float-large-width: 600px;
     --float-left-callout-margin-inline: 0 12px;
     --float-right-callout-margin-inline: 12px 0;
     --float-callout-top-margin: 0em;
-    
+
     --mcl-card-header-border-width: 1px;
     --mcl-card-bg-color: var(--background-secondary);
     --mcl-card-gap: 0.2em;
     --mcl-card-border-width: 1px;
     --mcl-card-border-color: var(--background-modifier-border);
-    
-    --col-rule-color: var(--background-modifier-border); 
-    --col-rule-width: 1px; 
-    
-    --callout-background-default: var(--background-secondary-alt); 
+
+    --col-rule-color: var(--background-modifier-border);
+    --col-rule-width: 1px;
+
+    --callout-background-default: var(--background-secondary-alt);
 }
 
 .popover.hover-popover {
@@ -53,7 +53,7 @@ body {
 
 @media (max-width: 500px) {
     body {
-        --radius: 0px; 
+        --radius: 0px;
         --micro: 70px;
         --tiny: 100px;
         --small: 150px;
@@ -65,8 +65,12 @@ body {
     }
 }
 
+/*
+    Source: https://github.com/efemkay/obsidian-modular-css-layout/blob/main/MCL%20Multi%20Column.css
+*/
+
 .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]) {
-    --callout-color: var(--accent-color) !important; 
+    --callout-color: var(--accent-color) !important;
     border-color: var(--background-modifier-border) !important;
     box-shadow: 0 0 0 var(--mcl-card-border-width) var(--background-modifier-border) !important;
     --callout-border-color: var(--background-modifier-border);
@@ -74,15 +78,26 @@ body {
     background-color: var(--callout-background-default) !important;
 }
 
+/* --------------------------------------------------------------------- */
+/* Callout Backgrounds: Light Themes (Black text) */
+/* --------------------------------------------------------------------- */
+
 .manila .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]),
 .white .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]),
-.pink .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]) {
+.pink .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]),
+.yellow .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]) { /* AGGIUNTO: Yellow */
     --callout-background: color-mix(in srgb, var(--page-color) 90%, black) !important;
     background-color: var(--callout-background) !important;
 }
 
-.blue .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout*="blank"]):not([data-callout="folder"]),
-.gray .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout*="blank"]):not([data-callout="folder"]) {
+/* --------------------------------------------------------------------- */
+/* Callout Backgrounds: Dark Themes (White text) */
+/* --------------------------------------------------------------------- */
+
+.blue .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]),
+.grey .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]), /* Updated from .gray */
+.purple .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]), /* AGGIUNTO */
+.green .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]) { /* AGGIUNTO */
     --callout-background: color-mix(in srgb, var(--page-color) 85%, white) !important;
     background-color: var(--callout-background) !important;
 }
@@ -91,62 +106,73 @@ body {
     color: var(--accent-color) !important;
 }
 
+/* --------------------------------------------------------------------- */
+/* Callout Backgrounds: Nested in COL - Light Themes (Black text) */
+/* --------------------------------------------------------------------- */
+
 .manila div[data-callout="col"].callout .callout:not([data-callout="col"]),
 .white div[data-callout="col"].callout .callout:not([data-callout="col"]),
-.pink div[data-callout="col"].callout .callout:not([data-callout="col"]) {
+.pink div[data-callout="col"].callout .callout:not([data-callout="col"]),
+.yellow div[data-callout="col"].callout .callout:not([data-callout="col"]) { /* AGGIUNTO: Yellow */
     --dynamic-bg: color-mix(in srgb, var(--page-color) 90%, black);
-    background-color: var(--dynamic-bg) !important; 
-    --mcl-card-bg-color: var(--dynamic-bg); 
+    background-color: var(--dynamic-bg) !important;
+    --mcl-card-bg-color: var(--dynamic-bg);
     --mcl-card-border-color: var(--background-modifier-border);
     --col-rule-color: var(--background-modifier-border);
 }
+
+/* --------------------------------------------------------------------- */
+/* Callout Backgrounds: Nested in COL - Dark Themes (White text) */
+/* --------------------------------------------------------------------- */
 
 .blue div[data-callout="col"].callout .callout:not([data-callout="col"]),
-.gray div[data-callout="col"].callout .callout:not([data-callout="col"]) {
+.grey div[data-callout="col"].callout .callout:not([data-callout="col"]), /* Updated from .gray */
+.purple div[data-callout="col"].callout .callout:not([data-callout="col"]), /* AGGIUNTO */
+.green div[data-callout="col"].callout .callout:not([data-callout="col"]) { /* AGGIUNTO */
     --dynamic-bg: color-mix(in srgb, var(--page-color) 85%, white);
-    background-color: var(--dynamic-bg) !important; 
-    --mcl-card-bg-color: var(--dynamic-bg); 
+    background-color: var(--dynamic-bg) !important;
+    --mcl-card-bg-color: var(--dynamic-bg);
     --mcl-card-border-color: var(--background-modifier-border);
     --col-rule-color: var(--background-modifier-border);
 }
 
-div[data-callout="col"].callout > .callout-title { 
-    display: none; 
+div[data-callout="col"].callout > .callout-title {
+    display: none;
 }
 
-div[data-callout="col"].callout > .callout-content { 
-    display: contents; 
+div[data-callout="col"].callout > .callout-content {
+    display: contents;
 }
 
-div[data-callout="col"].callout { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: var(--callout-gap); 
-    background: unset; 
-    border: unset; 
-    margin: unset; 
-    padding: unset; 
-    clear: both; 
+div[data-callout="col"].callout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--callout-gap);
+    background: unset;
+    border: unset;
+    margin: unset;
+    padding: unset;
+    clear: both;
     --callout-blend-mode: normal;
-    --columns: unset; 
+    --columns: unset;
 }
 
-div[data-callout="col"].callout .callout:not([data-callout="col"]) { 
-    display: flex; 
-    flex-direction: column; 
+div[data-callout="col"].callout .callout:not([data-callout="col"]) {
+    display: flex;
+    flex-direction: column;
 }
 
-div[data-callout="col"].callout:not(.is-collapsed) .callout { 
-    margin-inline: var(--callout-margin); 
-    margin-block: var(--callout-margin); 
+div[data-callout="col"].callout:not(.is-collapsed) .callout {
+    margin-inline: var(--callout-margin);
+    margin-block: var(--callout-margin);
 }
 
-div[data-callout="col"].callout .callout .callout-content { 
-    flex-grow: 1; 
+div[data-callout="col"].callout .callout .callout-content {
+    flex-grow: 1;
 }
 
-div[data-callout="col"].callout > .callout-content > *:is(div, ul, blockquote, p) { 
-    flex: 1 1 var(--callout-min-width); 
+div[data-callout="col"].callout > .callout-content > *:is(div, ul, blockquote, p) {
+    flex: 1 1 var(--callout-min-width);
     margin: 0;
 }
 
@@ -154,44 +180,44 @@ body:not(.table-100):not(.table-max):not(.table-wide) .markdown-preview-view.is-
     width: auto;
 }
 
-div[data-callout="col"][data-callout-metadata*="ctr"].callout { 
-    justify-content: center; 
+div[data-callout="col"][data-callout-metadata*="ctr"].callout {
+    justify-content: center;
 }
 
-div[data-callout="col"][data-callout-metadata*="ctr"].callout > .callout-content > *:is(div, ul) { 
-    flex-grow: 0; 
+div[data-callout="col"][data-callout-metadata*="ctr"].callout > .callout-content > *:is(div, ul) {
+    flex-grow: 0;
 }
 
 div[data-callout="col"][data-callout-metadata*="no-wrap"].callout {
-    flex-wrap: nowrap; 
-    overflow-x: scroll; 
+    flex-wrap: nowrap;
+    overflow-x: scroll;
 }
 
-div[data-callout="col"][data-callout-metadata*="no-wrap"] > .callout-content > *:is(div, ul) { 
-    flex-shrink: 0; 
+div[data-callout="col"][data-callout-metadata*="no-wrap"] > .callout-content > *:is(div, ul) {
+    flex-shrink: 0;
 }
 
-div[data-callout="col"] .callout[data-callout-metadata*="ctr"] { 
-    text-align: center; 
+div[data-callout="col"] .callout[data-callout-metadata*="ctr"] {
+    text-align: center;
 }
 
-div[data-callout="col"][data-callout-metadata*="menu"].callout { 
-    justify-content: center; 
+div[data-callout="col"][data-callout-metadata*="menu"].callout {
+    justify-content: center;
 }
 
-div[data-callout="col"][data-callout-metadata*="menu"].callout > .callout-content > *:is(div,ul) { 
-    flex-grow: 0; 
-    flex-basis: calc( var(--float-small-width) * 0.5 ); 
+div[data-callout="col"][data-callout-metadata*="menu"].callout > .callout-content > *:is(div,ul) {
+    flex-grow: 0;
+    flex-basis: calc( var(--float-small-width) * 0.5 );
 }
 
 div[data-callout*="blank"].callout {
     --callout-blend-mode: normal;
-    border: 0 !important; 
-    padding-top: 0; 
-    padding-inline: 5px; 
-    background: unset !important; 
+    border: 0 !important;
+    padding-top: 0;
+    padding-inline: 5px;
+    background: unset !important;
     box-shadow: unset !important;
-    
+
     --callout-border-color: transparent !important;
     --callout-shadow: none !important;
     --callout-title-background: unset !important;
@@ -199,17 +225,21 @@ div[data-callout*="blank"].callout {
     background-color: unset !important;
 }
 
-div[data-callout*="blank"].callout > .callout-title { 
-    display: none; 
+div[data-callout*="blank"].callout > .callout-title {
+    display: none;
 }
 
-div[data-callout*="blank"].callout > .callout-content { 
-    display: contents; 
+div[data-callout*="blank"].callout > .callout-content {
+    display: contents;
 }
 
 div[data-callout*="blank"] .callout-content > p:only-child {
     margin-block: 0;
 }
+
+/*
+    Source: https://github.com/SlRvb/Obsidian--ITS-Theme/blob/main/Snippets/S%20-%20Images%20Adjustments.css
+*/
 
 .view-content img[alt]:not([alt*=relative]):is([alt*=w7x],
 [alt*=w10x],
@@ -220,7 +250,7 @@ div[data-callout*="blank"] .callout-content > p:only-child {
 [alt*=w60x],
 [alt*=w70x],
 [alt*=wfull]) {
-    width: var(--image-adj-size-w); 
+    width: var(--image-adj-size-w);
 }
 .view-content img[alt]:not([alt*=relative]):is([alt*=h7x],
 [alt*=h10x],
@@ -231,7 +261,7 @@ div[data-callout*="blank"] .callout-content > p:only-child {
 [alt*=h60x],
 [alt*=h70x],
 [alt*=hfull]) {
-    height: var(--image-adj-size-h); 
+    height: var(--image-adj-size-h);
 }
 
 .view-content img[alt]:not([alt*=relative])[alt*=h7x] {
@@ -381,7 +411,7 @@ div:not(.image-embed) > img[alt*=relative] {
 img[alt~=ctr] {
     display: block;
     margin-left: auto;
-    margin-right: auto; 
+    margin-right: auto;
 }
 
 .img-adj-center.img-adj-center .is-live-preview img {
@@ -389,19 +419,19 @@ img[alt~=ctr] {
     margin-right: auto !important;
 }
 
-.markdown-rendered img[alt~=locl], 
-.markdown-rendered img[src*="#locl"], 
-.markdown-rendered .image-embed[alt~=locl], 
+.markdown-rendered img[alt~=locl],
+.markdown-rendered img[src*="#locl"],
+.markdown-rendered .image-embed[alt~=locl],
 .markdown-rendered .image-embed[src*="#locl"] {
-    float: inline-start; 
+    float: inline-start;
     margin-right: 2%;
     margin-top: 0;
     margin-bottom: 0;
 }
 
-img[alt~=locl], 
+img[alt~=locl],
 .image-embed[alt~=locl],
-img[src*="#locl"], 
+img[src*="#locl"],
 .image-embed[src*="#locl"] {
     float: left !important;
     margin-right: 2%;
@@ -410,21 +440,21 @@ img[src*="#locl"],
 }
 
 
-.markdown-rendered img[alt~=locr], 
-.markdown-rendered img[src*="#locr"], 
-.markdown-rendered .image-embed[alt~=locr], 
+.markdown-rendered img[alt~=locr],
+.markdown-rendered img[src*="#locr"],
+.markdown-rendered .image-embed[alt~=locr],
 .markdown-rendered .image-embed[src*="#locr"] {
-    float: inline-end; 
+    float: inline-end;
     margin-left: 2%;
     margin-bottom: 0;
     margin-top: 0;
 }
 
-img[alt~=locr], 
+img[alt~=locr],
 .image-embed[alt~=locr],
-img[src*="#locr"], 
+img[src*="#locr"],
 .image-embed[src*="#locr"] {
-    float: right !important; 
+    float: right !important;
     margin-left: 2%;
     margin-bottom: 0;
     margin-top: 0;
@@ -432,7 +462,7 @@ img[src*="#locr"],
 
 .image-captions .image-embed::after,
 .image-embed[src*="#cap"]::after {
-    content: attr(alt); 
+    content: attr(alt);
     color: gray;
     display: block;
     text-align: center;
@@ -469,12 +499,16 @@ img[src*="#locr"],
 .mobile-image-viewer img[alt] {
     height: 100%;
     width: 100%;
-    object-fit: contain; 
+    object-fit: contain;
 }
 
-:is(ul, ol) { 
-    display: flow-root; 
+:is(ul, ol) {
+    display: flow-root;
 }
+
+/*
+    Source: https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets/blob/Collection/Snippets/Callout%20styling%20-%20Folder%20structure%20callout.md
+*/
 
 .callout[data-callout="folder" i] {
     --list-indent: 0em;
@@ -547,9 +581,9 @@ img[src*="#locr"],
 }
 
 .callout[data-callout="folder" i] {
-    --callout-icon: folder; 
-    --callout-color: var(--background-modifier-border); 
-    
+    --callout-icon: folder;
+    --callout-color: var(--background-modifier-border);
+
     --callout-background: var(--callout-background-default) !important;
     background-color: var(--callout-background-default) !important;
     border-color: var(--background-modifier-border) !important;
@@ -557,11 +591,11 @@ img[src*="#locr"],
 }
 
 .callout[data-callout="folder" i] > .callout-title {
-    display: flex !important; 
+    display: flex !important;
     background-color: transparent !important;
-    border-bottom: 1px solid var(--callout-color); 
-    padding-bottom: 0.5em; 
-    margin-bottom: 0.5em; 
+    border-bottom: 1px solid var(--callout-color);
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 /* Rende il background del callout 'folder' trasparente solo quando non è annidato in un callout 'col' */
@@ -579,4 +613,51 @@ img[src*="#locr"],
 /* Mantiene il titolo (header) del callout 'folder' separato con un bordo inferiore (come definito nel codice originale, ma adattato) */
 .callout[data-callout="folder" i]:not(div[data-callout="col"].callout .callout) > .callout-title {
     border-bottom: 1px solid var(--callout-color); /* Puoi anche usare var(--background-modifier-border) o un colore specifico */
+}
+
+/*
+  Source: https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets/blob/Collection/Snippets/Code%20block%20styling%2001.md
+*/
+
+/* --------------------------------------------------------------------- */
+/* Stili per Blocchi di Codice (Code Blocks) */
+/* --------------------------------------------------------------------- */
+
+/* Modalità Lettura */
+.markdown-rendered pre {
+  /* Usiamo una variabile del callout per il colore del bordo per coerenza */
+  border: solid var(--background-modifier-border); 
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-lm-only);
+  background: transparent !important; /* Rende lo sfondo trasparente */
+}
+
+/* Modalità Live Preview */
+.cm-s-obsidian div.HyperMD-codeblock-begin-bg {
+  background: transparent !important; /* Rende lo sfondo trasparente */
+  
+  /* Usa un colore dinamico per il bordo superiore, come quello dei callout */
+  border-top: solid var(--background-modifier-border);
+  
+  /* stylelint-disable-next-line declaration-no-important */
+  border-top-right-radius: 8px !important;
+  /* stylelint-disable-next-line declaration-no-important */
+  border-top-left-radius: 8px !important;
+  margin-top: 8px;
+}
+
+.cm-s-obsidian div.HyperMD-codeblock-end-bg {
+  background: transparent !important; /* Rende lo sfondo trasparente */
+
+  /* Usa un colore dinamico per il bordo inferiore */
+  border-bottom: solid var(--background-modifier-border);
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.cm-s-obsidian div.HyperMD-codeblock-bg {
+  /* Usa un colore dinamico per i bordi laterali */
+  border-right: solid var(--background-modifier-border);
+  border-left: solid var(--background-modifier-border);
+  background: transparent !important; /* Rende lo sfondo trasparente */
 }

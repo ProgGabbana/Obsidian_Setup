@@ -1,4 +1,6 @@
 /*
+  Source: https://github.com/CyanVoxel/Obsidian-Notebook-Themes?tab=readme-ov-file
+
 ================================================================================
   SIMPLIFIED CSS TEMPLATE: PAGE & PEN THEME
 ================================================================================
@@ -17,19 +19,22 @@ CLASS SYNTAX AND USAGE
     - .white: Pure white background (Light theme).
     - .blue: Dark blue background (Dark theme).
     - .pink: Light pink background (Light theme).
-    - .gray: Dark gray background (Dark theme).
+    - .grey: Dark grey background (Dark theme).
+    - .yellow: Bright yellow background (Light theme, text is now black). <--- UPDATED
+    - .purple: Dark purple background (Dark theme).
+    - .green: Dark green background (Dark theme).
     - .embed-[theme]: Applies background color to transparent embedded images.
 
 2. PEN COLORS (ACCENT)
     Overrides the accent color defined by the page theme.
     - .white-pen
-    - .gray-pen
+    - .grey-pen
     - .black-pen
     - .red-pen
     - .green-pen
     - .blue-pen
     - .purple-pen
-    - .yellow-pen 
+    - .yellow-pen
 
 3. GRID AND ROW LAYOUT (APPLIED TO THE PAGE)
     Adds a background pattern.
@@ -50,7 +55,7 @@ ACCENT/PEN VARIABLES:
 
 BACKGROUND/PAGE VARIABLES:
 - --page-color: The primary background color of the page.
-- --bg-white, --bg-manila, --bg-blue, --bg-pink, --bg-darkgray: Base page colors.
+- --bg-white, --bg-manila, --bg-blue, --bg-pink, --bg-darkgrey, --bg-yellow, --bg-purple, --bg-green: Base page colors.
 
 DIMENSIONAL VARIABLES:
 - --grid-size: 15px (Standard size for grids and rows).
@@ -59,20 +64,20 @@ DIMENSIONAL VARIABLES:
 */
 
 /*
-  Source: 
+  Source:
 */
 
 :root {
   /* Base Pen Colors */
   --white: #edf1fc;
-  --gray: #5f5d58; 
+  --grey: #5f5d58;
   --black: #26241f;
   --red: #b31702;
   --green: #15b64f;
   --blue: #3f76ed;
   --light-blue: #54b6f8;
   --purple: #9b4ff0;
-  --yellow: #f3d03c; 
+  --yellow: #f3d03c; /* This is the yellow-pen color */
 
   --neutral-black: #272727;
   --neutral-black-trans: #27272722;
@@ -82,7 +87,10 @@ DIMENSIONAL VARIABLES:
   --bg-manila: #f3deaf;
   --bg-blue: #3f76ed;
   --bg-pink: #ffe6f0;
-  --bg-darkgray: #303030; 
+  --bg-darkgrey: #303030;
+  --bg-yellow: #f7e8a0; /* MODIFICATO: Giallo chiaro e luminoso per tema light */
+  --bg-purple: #3f2a58;
+  --bg-green: #1d331d;
 
   /* Standard Grid Dimensions */
   --grid-size: 15px;
@@ -94,12 +102,15 @@ DIMENSIONAL VARIABLES:
   filter: var(--image-effect);
 }
 
-/* 02: Common Styles for all Themes (manila, white, blue, pink, gray) */
+/* 02: Common Styles for all Themes (manila, white, blue, pink, grey, yellow, purple, green) */
 .manila,
 .white,
 .blue,
 .pink,
-.gray {
+.grey,
+.yellow, /* Yellow is now a light theme, but shares common structure */
+.purple,
+.green {
   /* Text and Heading Colors */
   --text-normal: var(--accent-color);
   --text-muted: var(--accent-color);
@@ -110,9 +121,9 @@ DIMENSIONAL VARIABLES:
   --h4-color: var(--accent-color);
   --h5-color: var(--accent-color);
   --h6-color: var(--accent-color);
-  
+
   /* Links */
-  --link-color: var(--blue); 
+  --link-color: var(--blue);
   --link-color-hover: var(--light-blue);
   --link-unresolved-color: var(--red);
 
@@ -147,14 +158,17 @@ DIMENSIONAL VARIABLES:
 }
 
 /* 03: Table Header Styles */
-.manila table th, 
+.manila table th,
 .white table th,
-.pink table th {
+.pink table th,
+.yellow table th { /* AGGIUNTO: Yellow usa testo nero */
   color: var(--black);
   font-weight: bold;
 }
 .blue table th,
-.gray table th {
+.grey table th,
+.purple table th,
+.green table th {
   color: var(--white);
   font-weight: bold;
 }
@@ -180,7 +194,7 @@ DIMENSIONAL VARIABLES:
 .embed-white img { background-color: var(--bg-white); }
 
 /* 04.3: Blue Theme */
-.blue { 
+.blue {
   --page-color: var(--bg-blue);
   --accent-color: var(--white);
   --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
@@ -201,9 +215,9 @@ DIMENSIONAL VARIABLES:
 }
 .embed-pink img { background-color: var(--bg-pink); }
 
-/* 04.5: Gray Theme (Dark) */
-.gray {
-  --page-color: var(--bg-darkgray);
+/* 04.5: Grey Theme (Dark) */
+.grey {
+  --page-color: var(--bg-darkgrey);
   --accent-color: var(--white);
   --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
   --image-effect: brightness(0) saturate(100%) invert(89%) sepia(1%) saturate(2714%) hue-rotate(196deg) brightness(107%) contrast(98%);
@@ -211,12 +225,50 @@ DIMENSIONAL VARIABLES:
   --link-color: color-mix(in srgb, var(--light-blue) 60%, var(--white));
   --link-color-hover: color-mix(in srgb, var(--light-blue) 20%, var(--white));
 }
-.embed-gray img { background-color: var(--bg-darkgray); }
+.embed-grey img { background-color: var(--bg-darkgrey); }
+
+/* 04.6: Yellow Theme (Light) - TESTO NERO */
+.yellow {
+  --page-color: var(--bg-yellow);
+  --accent-color: var(--black); /* IMPOSTATO SU NERO */
+  --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(14%) sepia(19%) saturate(296%) hue-rotate(5deg) brightness(90%) contrast(96%); /* Filtro per immagini scure */
+  color-scheme: light; /* TEMA CHIARO */
+  /* Reindirizzamento link a colori scuri di default, come in pink/manila */
+  --link-color: var(--blue);
+  --link-color-hover: var(--light-blue);
+}
+.embed-yellow img { background-color: var(--bg-yellow); }
+
+/* 04.7: Purple Theme (Dark) */
+.purple {
+  --page-color: var(--bg-purple);
+  --accent-color: var(--white);
+  --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(89%) sepia(1%) saturate(2714%) hue-rotate(196deg) brightness(107%) contrast(98%);
+  color-scheme: dark;
+  --link-color: color-mix(in srgb, var(--light-blue) 60%, var(--white));
+  --link-color-hover: color-mix(in srgb, var(--light-blue) 20%, var(--white));
+}
+.embed-purple img { background-color: var(--bg-purple); }
+
+/* 04.8: Green Theme (Dark) */
+.green {
+  --page-color: var(--bg-green);
+  --accent-color: var(--white);
+  --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(89%) sepia(1%) saturate(2714%) hue-rotate(196deg) brightness(107%) contrast(98%);
+  color-scheme: dark;
+  --link-color: color-mix(in srgb, var(--light-blue) 60%, var(--white));
+  --link-color-hover: color-mix(in srgb, var(--light-blue) 20%, var(--white));
+}
+.embed-green img { background-color: var(--bg-green); }
+
 
 /* 05: Grid and Row Backgrounds */
 
-.grid { 
-  background-image: 
+.grid {
+  background-image:
     linear-gradient(0deg, transparent 0px, var(--accent-color-trans) 1px, var(--accent-color-trans) 2px, transparent 3px),
     linear-gradient(90deg, transparent calc(var(--grid-size) - 3px), var(--accent-color-trans) calc(var(--grid-size) - 2px), var(--accent-color-trans) calc(var(--grid-size) - 1px), transparent var(--grid-size));
   background-size: var(--grid-size) var(--grid-size);
@@ -230,12 +282,12 @@ DIMENSIONAL VARIABLES:
 /* 06: Styles for Specific Elements */
 
 /* 06.1: SVGs (Icons) */
-:is(.white, .manila, .blue, .pink, .gray, .white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .gray-pen, .purple-pen, .yellow-pen) svg {
+:is(.white, .manila, .blue, .pink, .grey, .yellow, .purple, .green, .white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen) svg {
   color: color-mix(in srgb, var(--accent-color) 60%, transparent);
 }
 
 /* 06.2: Code Blocks */
-:is(.white, .manila, .blue, .pink, .gray) :is(code, .HyperMD-codeblock, .cm-inline-code) {
+:is(.white, .manila, .blue, .pink, .grey, .yellow, .purple, .green) :is(code, .HyperMD-codeblock, .cm-inline-code) {
   --code-normal: var(--accent-color);
   --code-background: color-mix(in srgb, var(--page-color) 80%, black) !important;
 }
@@ -243,8 +295,15 @@ div > pre {
   --code-background: color-mix(in srgb, var(--page-color) 80%, black) !important;
 }
 
+/* 06.3: Code Blocks con solo Pen (senza tema di pagina) */
+:is(.white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen):not(.white):not(.manila):not(.blue):not(.pink):not(.grey):not(.yellow):not(.purple):not(.green) :is(code, .HyperMD-codeblock, .cm-inline-code) {
+  --code-normal: var(--accent-color);
+  --code-background: color-mix(in srgb, var(--background-primary, #ffffff) 80%, black) !important;
+}
+
+
 /* 07: Pen Colors (Accent Overrides) */
-.white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .gray-pen, .purple-pen, .yellow-pen {
+.white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen {
   color: var(--accent-color);
   --hr-color: var(--accent-color);
 }
@@ -274,9 +333,9 @@ div > pre {
   --accent-color-trans: color-mix(in srgb, var(--black) 15%, transparent);
   --image-effect: brightness(0) saturate(100%) invert(14%) sepia(19%) saturate(296%) hue-rotate(5deg) brightness(90%) contrast(96%);
 }
-.gray-pen {
-  --accent-color: var(--gray); 
-  --accent-color-trans: color-mix(in srgb, var(--gray) 15%, transparent);
+.grey-pen {
+  --accent-color: var(--grey);
+  --accent-color-trans: color-mix(in srgb, var(--grey) 15%, transparent);
   --image-effect: brightness(0) saturate(100%) invert(35%) sepia(13%) saturate(189%) hue-rotate(5deg) brightness(96%) contrast(86%);
 }
 .purple-pen {
@@ -287,5 +346,5 @@ div > pre {
 .yellow-pen {
   --accent-color: var(--yellow);
   --accent-color-trans: color-mix(in srgb, var(--yellow) 15%, transparent);
-  --image-effect: brightness(0) saturate(100%) invert(10%) sepia(70%) saturate(2000%) hue-rotate(50deg) brightness(100%) contrast(90%); 
+  --image-effect: brightness(0) saturate(100%) invert(10%) sepia(70%) saturate(2000%) hue-rotate(50deg) brightness(100%) contrast(90%);
 }

@@ -62,7 +62,8 @@ body {
   --metadata-label-width: 5em;
 }
 
-
+/* ------------------------------------------------ */
+/* Change ribbon icon color */
 .workspace-ribbon.side-dock-ribbon.mod-left .clickable-icon {
   color: rgb(255, 255, 255);
 }

@@ -72,7 +72,7 @@
    ======================================================= */
 
 /* Sfondo e Testo (Comune a tutti i temi) */
-:is(.manila, .white, .blue, .pink, .gray, .white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .gray-pen, .purple-pen, .yellow-pen) .callout[data-callout~=sidenote] {
+:is(.manila, .white, .blue, .pink, .grey, .yellow, .purple, .green, .white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen) .callout[data-callout~=sidenote] {
     /* Sfondo: Usa il colore della pagina e schiariscilo/scuriscilo leggermente */
     --callout-color: color-mix(in srgb, var(--page-color) 90%, var(--accent-color-trans));
     
@@ -84,8 +84,8 @@
 }
 
 
-/* Overrides per Temi Scuri (Blue, Gray) - Assicura testo chiaro su sfondo scuro */
-:is(.blue, .gray) .callout[data-callout~=sidenote] {
+/* Overrides per Temi Scuri (Blue, Grey, Purple, Green) - Assicura testo chiaro su sfondo scuro */
+:is(.blue, .grey, .purple, .green) .callout[data-callout~=sidenote] {
     /* Testo (opzionale): Usa il bianco come fallback */
     color: var(--white); 
     

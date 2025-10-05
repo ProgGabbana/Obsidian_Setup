@@ -69,7 +69,16 @@ body {
     Source: https://github.com/efemkay/obsidian-modular-css-layout/blob/main/MCL%20Multi%20Column.css
 */
 
-.callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]) {
+/*
+    Source: https://github.com/efemkay/obsidian-modular-css-layout/blob/main/MCL%20Multi%20Column.css
+*/
+
+/*
+    Source: https://github.com/efemkay/obsidian-modular-css-layout/blob/main/MCL%20Multi%20Column.css
+*/
+
+/* 1. Stili di base per callout standard (Esclusi COL e BLANK) */
+.callout:not([data-callout="col" i]):not([data-callout*="blank" i]) {
     --callout-color: var(--accent-color) !important;
     border-color: var(--background-modifier-border) !important;
     box-shadow: 0 0 0 var(--mcl-card-border-width) var(--background-modifier-border) !important;
@@ -82,10 +91,11 @@ body {
 /* Callout Backgrounds: Light Themes (Black text) */
 /* --------------------------------------------------------------------- */
 
-.manila .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]),
-.white .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]),
-.pink .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]),
-.yellow .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]) { /* AGGIUNTO: Yellow */
+/* 2. Callout standard in Light Themes (Esclusi COL e BLANK) */
+.manila .callout:not([data-callout="col" i]):not([data-callout*="blank" i]),
+.white .callout:not([data-callout="col" i]):not([data-callout*="blank" i]),
+.pink .callout:not([data-callout="col" i]):not([data-callout*="blank" i]),
+.yellow .callout:not([data-callout="col" i]):not([data-callout*="blank" i]) {
     --callout-background: color-mix(in srgb, var(--page-color) 90%, black) !important;
     background-color: var(--callout-background) !important;
 }
@@ -94,15 +104,17 @@ body {
 /* Callout Backgrounds: Dark Themes (White text) */
 /* --------------------------------------------------------------------- */
 
-.blue .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]),
-.grey .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]), /* Updated from .gray */
-.purple .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]), /* AGGIUNTO */
-.green .callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]) { /* AGGIUNTO */
+/* 3. Callout standard in Dark Themes (Esclusi COL e BLANK) */
+.blue .callout:not([data-callout="col" i]):not([data-callout*="blank" i]),
+.grey .callout:not([data-callout="col" i]):not([data-callout*="blank" i]),
+.purple .callout:not([data-callout="col" i]):not([data-callout*="blank" i]),
+.green .callout:not([data-callout="col" i]):not([data-callout*="blank" i]) {
     --callout-background: color-mix(in srgb, var(--page-color) 85%, white) !important;
     background-color: var(--callout-background) !important;
 }
 
-.callout:not([data-callout="col"]):not([data-callout*="blank"]):not([data-callout="folder"]) > .callout-title {
+/* 6. Titolo dei callout standard (Esclusi COL e BLANK) */
+.callout:not([data-callout="col" i]):not([data-callout*="blank" i]) > .callout-title {
     color: var(--accent-color) !important;
 }
 
@@ -110,10 +122,11 @@ body {
 /* Callout Backgrounds: Nested in COL - Light Themes (Black text) */
 /* --------------------------------------------------------------------- */
 
-.manila div[data-callout="col"].callout .callout:not([data-callout="col"]),
-.white div[data-callout="col"].callout .callout:not([data-callout="col"]),
-.pink div[data-callout="col"].callout .callout:not([data-callout="col"]),
-.yellow div[data-callout="col"].callout .callout:not([data-callout="col"]) { /* AGGIUNTO: Yellow */
+/* 4. Callout standard annidato in 'col' - Light Themes (Esclusi COL e BLANK) */
+.manila div[data-callout="col" i].callout .callout:not([data-callout="col" i]):not([data-callout*="blank" i]),
+.white div[data-callout="col" i].callout .callout:not([data-callout="col" i]):not([data-callout*="blank" i]),
+.pink div[data-callout="col" i].callout .callout:not([data-callout="col" i]):not([data-callout*="blank" i]),
+.yellow div[data-callout="col" i].callout .callout:not([data-callout="col" i]):not([data-callout*="blank" i]) {
     --dynamic-bg: color-mix(in srgb, var(--page-color) 90%, black);
     background-color: var(--dynamic-bg) !important;
     --mcl-card-bg-color: var(--dynamic-bg);
@@ -125,16 +138,21 @@ body {
 /* Callout Backgrounds: Nested in COL - Dark Themes (White text) */
 /* --------------------------------------------------------------------- */
 
-.blue div[data-callout="col"].callout .callout:not([data-callout="col"]),
-.grey div[data-callout="col"].callout .callout:not([data-callout="col"]), /* Updated from .gray */
-.purple div[data-callout="col"].callout .callout:not([data-callout="col"]), /* AGGIUNTO */
-.green div[data-callout="col"].callout .callout:not([data-callout="col"]) { /* AGGIUNTO */
+/* 5. Callout standard annidato in 'col' - Dark Themes (Esclusi COL e BLANK) */
+.blue div[data-callout="col" i].callout .callout:not([data-callout="col" i]):not([data-callout*="blank" i]),
+.grey div[data-callout="col" i].callout .callout:not([data-callout="col" i]):not([data-callout*="blank" i]),
+.purple div[data-callout="col" i].callout .callout:not([data-callout="col" i]):not([data-callout*="blank" i]),
+.green div[data-callout="col" i].callout .callout:not([data-callout="col" i]):not([data-callout*="blank" i]) {
     --dynamic-bg: color-mix(in srgb, var(--page-color) 85%, white);
     background-color: var(--dynamic-bg) !important;
     --mcl-card-bg-color: var(--dynamic-bg);
     --mcl-card-border-color: var(--background-modifier-border);
     --col-rule-color: var(--background-modifier-border);
 }
+
+/*
+    La logica specifica per il callout 'folder' (inclusi i selettori per l'annidamento in 'col') non è stata toccata e resta come nel file originale.
+*/
 
 div[data-callout="col"].callout > .callout-title {
     display: none;
@@ -661,3 +679,5 @@ img[src*="#locr"],
   border-left: solid var(--background-modifier-border);
   background: transparent !important; /* Rende lo sfondo trasparente */
 }
+
+

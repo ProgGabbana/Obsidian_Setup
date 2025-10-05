@@ -67,3 +67,33 @@ body {
 .workspace-ribbon.side-dock-ribbon.mod-left .clickable-icon {
   color: rgb(255, 255, 255);
 }
+
+/*
+    Source: https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets/blob/Collection/Snippets/Show%20note%20header%20on%20hover.md
+*/
+
+.workspace-tabs:not(.mod-top) .workspace-tab-header-container {
+    height: 0px;
+    transition: height 200ms ease-in;
+
+    &:hover {
+        height: var(--header-height);
+    }
+
+    &::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: var(--size-4-4);
+        top: 100%;
+        position: absolute;
+        z-index: 1;
+    }
+}
+
+/*
+    Source: https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets/blob/Collection/Snippets/Left%20aligned%20note%20header.md
+*/
+.view-header-title-container {
+  justify-content: start;
+}

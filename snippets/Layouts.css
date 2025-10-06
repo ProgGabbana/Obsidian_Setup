@@ -15,7 +15,7 @@ CLASS SYNTAX AND USAGE
 1. PAGE THEMES (BACKGROUNDS)
     Defines the background color (--page-color) and the default accent color
     for text/elements (--accent-color).
-    - .yellow: Paper/beige background (Light theme). <--- RINOMINATO
+    - .yellow: Paper/beige background (Light theme).
     - .white: Pure white background (Light theme).
     - .blue: Dark blue background (Dark theme).
     - .pink: Light pink background (Light theme).
@@ -33,6 +33,7 @@ CLASS SYNTAX AND USAGE
     - .green-pen
     - .blue-pen
     - .purple-pen
+    - .yellow-pen
 
 3. GRID AND ROW LAYOUT (APPLIED TO THE PAGE)
     Adds a background pattern.
@@ -53,7 +54,7 @@ ACCENT/PEN VARIABLES:
 
 BACKGROUND/PAGE VARIABLES:
 - --page-color: The primary background color of the page.
-- --bg-white, --bg-yellow, --bg-blue, --bg-pink, --bg-darkgrey, --bg-purple, --bg-green: Base page colors. <--- AGGIORNATO
+- --bg-white, --bg-yellow, --bg-blue, --bg-pink, --bg-darkgrey, --bg-purple, --bg-green: Base page colors.
 
 DIMENSIONAL VARIABLES:
 - --grid-size: 15px (Standard size for grids and rows).
@@ -75,13 +76,14 @@ DIMENSIONAL VARIABLES:
   --blue: #3f76ed;
   --light-blue: #54b6f8;
   --purple: #9b4ff0;
+  --yellow: #f3d03c; /* RIAGGIUNTO */
 
   --neutral-black: #272727;
   --neutral-black-trans: #27272722;
 
   /* Page Background Colors */
   --bg-white: #ffffff;
-  --bg-yellow: #f3deaf; /* RINOMINATO da --bg-manila a --bg-yellow */
+  --bg-yellow: #f3deaf;
   --bg-blue: #3f76ed;
   --bg-pink: #ffe6f0;
   --bg-darkgrey: #303030;
@@ -99,7 +101,7 @@ DIMENSIONAL VARIABLES:
 }
 
 /* 02: Common Styles for all Themes (yellow, white, blue, pink, grey, purple, green) */
-.yellow, /* RINOMINATO */
+.yellow,
 .white,
 .blue,
 .pink,
@@ -149,33 +151,23 @@ DIMENSIONAL VARIABLES:
   /* Main Background and Text */
   color: var(--accent-color);
   background-color: var(--page-color);
-  /* RIMOZIONE: font-weight: bold; */
 }
 
 /* 03: Table Header Styles */
-.yellow table th, /* RINOMINATO */
-.white table th,
-.pink table th {
-  color: var(--black);
-  font-weight: bold;
-}
-.blue table th,
-.grey table th,
-.purple table th,
-.green table th {
-  color: var(--white);
+:is(.white-pen, .yellow-pen, .blue-pen, .grey-pen, .purple-pen, .green-pen) table th {
+  color: var(--accent-color);
   font-weight: bold;
 }
 
 /* 04.1: Yellow Theme (Paper) */
-.yellow { /* RINOMINATO */
-  --page-color: var(--bg-yellow); /* AGGIORNATO */
+.yellow {
+  --page-color: var(--bg-yellow);
   --accent-color: var(--black);
   --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
   --image-effect: brightness(0) saturate(100%) invert(14%) sepia(19%) saturate(296%) hue-rotate(5deg) brightness(90%) contrast(96%);
   color-scheme: light;
 }
-.embed-yellow img { background-color: var(--bg-yellow); } /* RINOMINATO */
+.embed-yellow img { background-color: var(--bg-yellow); }
 
 /* 04.2: White Theme (White) */
 .white {
@@ -259,32 +251,32 @@ DIMENSIONAL VARIABLES:
   background-size: var(--grid-size) var(--grid-size);
 }
 
-/* 06: Styles for Specific Elements */
-
-/* 06.1: SVGs (Icons) */
-:is(.white, .yellow, .blue, .pink, .grey, .purple, .green, .white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen) svg { /* AGGIORNATO */
-  color: color-mix(in srgb, var(--accent-color) 60%, transparent);
+/* 06: Styles for Specific Elements 
+   06.1: Callout */
+:is(.yellow, .white, .blue, .pink, .grey, .purple, .green, .white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen
+) :is(.callout > .callout-title, svg) {
+    color: var(--accent-color) !important;
 }
 
-/* 06.2: Code Blocks (Regola che ora si applica solo in presenza di un tema) */
+/* 06.2: Code Blocks */
 :is(.white, .yellow, .blue, .pink, .grey, .purple, .green) :is(code, .HyperMD-codeblock, .cm-inline-code) {
   --code-normal: var(--accent-color);
   --code-background: color-mix(in srgb, var(--page-color) 90%, black) !important;
 }
-:is(.white, .yellow, .blue, .pink, .grey, .purple, .green) div > pre {
+:is(.white, .yellow, .blue, .pink, .grey, .purple, .green) div > pre { /* Condizionale al tema */
   --code-background: color-mix(in srgb, var(--page-color) 90%, black) !important;
 }
 
 /* 06.3: Code Blocks con solo Pen (senza tema di pagina) */
-:is(.white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen):not(.white):not(.yellow):not(.blue):not(.pink):not(.grey):not(.purple):not(.green) :is(code, .HyperMD-codeblock, .cm-inline-code) { /* AGGIORNATO */
+:is(.white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen):not(.white):not(.yellow):not(.blue):not(.pink):not(.grey):not(.purple):not(.green) :is(code, .HyperMD-codeblock, .cm-inline-code) { /* AGGIORNATO */
   --code-normal: var(--accent-color);
-  --code-background: color-mix(in srgb, var(--background-primary, #ffffff) 80%, black) !important;
 }
 
 /* 07: Pen Colors (Accent Overrides) */
-.white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen {
+.white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen {
   color: var(--accent-color);
   --hr-color: var(--accent-color);
+  --checklist-done-color: var(--accent-color);
 }
 
 .white-pen {
@@ -321,4 +313,9 @@ DIMENSIONAL VARIABLES:
   --accent-color: var(--purple);
   --accent-color-trans: color-mix(in srgb, var(--purple) 15%, transparent);
   --image-effect: brightness(0) saturate(100%) invert(33%) sepia(59%) saturate(2620%) hue-rotate(249deg) brightness(98%) contrast(93%);
+}
+.yellow-pen {
+  --accent-color: var(--yellow);
+  --accent-color-trans: color-mix(in srgb, var(--yellow) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(10%) sepia(70%) saturate(2000%) hue-rotate(50deg) brightness(100%) contrast(90%);
 }

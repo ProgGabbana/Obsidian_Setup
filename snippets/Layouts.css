@@ -56,6 +56,7 @@ ACCENT/PEN VARIABLES:
 BACKGROUND/PAGE VARIABLES:
 - --page-color: The primary background color of the page.
 - --bg-white, --bg-manila, --bg-blue, --bg-pink, --bg-darkgrey, --bg-yellow, --bg-purple, --bg-green: Base page colors.
+- --callout-bg-modifier: **NUOVA VARIABILE PER LO SFONDO DEI CALLOUT**
 
 DIMENSIONAL VARIABLES:
 - --grid-size: 15px (Standard size for grids and rows).
@@ -155,6 +156,9 @@ DIMENSIONAL VARIABLES:
   color: var(--accent-color);
   background-color: var(--page-color);
   /* RIMOZIONE: font-weight: bold; */
+
+  /* AGGIUNTA PER CALLOUT E BLOCCHI: Sfondo per distinguere il callout da page-color */
+  --callout-bg-modifier: color-mix(in srgb, var(--accent-color) 3%, transparent);
 }
 
 /* 03: Table Header Styles */
@@ -180,6 +184,8 @@ DIMENSIONAL VARIABLES:
   --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
   --image-effect: brightness(0) saturate(100%) invert(14%) sepia(19%) saturate(296%) hue-rotate(5deg) brightness(90%) contrast(96%);
   color-scheme: light;
+  /* MODIFICA: Sfondo callout visibile (leggermente più chiaro/scuro del manila) */
+  --callout-bg-modifier: #f7e8c0;
 }
 .embed-manila img { background-color: var(--bg-manila); }
 
@@ -190,6 +196,8 @@ DIMENSIONAL VARIABLES:
   --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
   --image-effect: brightness(0) saturate(100%) invert(14%) sepia(19%) saturate(296%) hue-rotate(5deg) brightness(90%) contrast(96%);
   color-scheme: light;
+  /* MODIFICA: Sfondo callout visibile (grigio chiaro non bianco) */
+  --callout-bg-modifier: #f0f0f0;
 }
 .embed-white img { background-color: var(--bg-white); }
 
@@ -212,6 +220,8 @@ DIMENSIONAL VARIABLES:
   --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
   --image-effect: brightness(0) saturate(100%) invert(14%) sepia(19%) saturate(296%) hue-rotate(5deg) brightness(90%) contrast(96%);
   color-scheme: light;
+  /* MODIFICA: Sfondo callout visibile (un rosa leggermente più chiaro/scuro del pink) */
+  --callout-bg-modifier: #fff0f5;
 }
 .embed-pink img { background-color: var(--bg-pink); }
 
@@ -237,6 +247,8 @@ DIMENSIONAL VARIABLES:
   /* Reindirizzamento link a colori scuri di default, come in pink/manila */
   --link-color: var(--blue);
   --link-color-hover: var(--light-blue);
+  /* MODIFICA: Sfondo callout visibile (un giallo leggermente più chiaro/scuro del yellow) */
+  --callout-bg-modifier: #fcf9e8;
 }
 .embed-yellow img { background-color: var(--bg-yellow); }
 
@@ -299,6 +311,14 @@ div > pre {
 :is(.white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen):not(.white):not(.manila):not(.blue):not(.pink):not(.grey):not(.yellow):not(.purple):not(.green) :is(code, .HyperMD-codeblock, .cm-inline-code) {
   --code-normal: var(--accent-color);
   --code-background: color-mix(in srgb, var(--background-primary, #ffffff) 80%, black) !important;
+}
+
+/* 06.4: CALLOUT FIX - Sovrascrive lo sfondo per tutti i callout */
+/* Se il tuo sistema usa una classe di base come .callout */
+.callout,
+div[data-callout] {
+    /* La variabile standard per lo sfondo del callout */
+    --callout-background: var(--callout-bg-modifier);
 }
 
 

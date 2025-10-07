@@ -62,10 +62,6 @@ DIMENSIONAL VARIABLES:
 ================================================================================
 */
 
-/*
-  Source:
-*/
-
 :root {
   /* Base Pen Colors */
   --white: #edf1fc;
@@ -90,7 +86,8 @@ DIMENSIONAL VARIABLES:
   --bg-purple: #3f2a58;
   --bg-green: #1d331d;
 
-  /* Standard Grid Dimensions */
+  /* Standard Dimensions */
+  --dots-size: 25px;
   --grid-size: 15px;
   --gridmil-size: 7px;
 }
@@ -100,7 +97,20 @@ DIMENSIONAL VARIABLES:
   filter: var(--image-effect);
 }
 
-/* 02: Common Styles for all Themes (yellow, white, blue, pink, grey, purple, green) */
+/* 02: Common Styles for all Themes & Pens */
+.white-pen, 
+.blue-pen, 
+.red-pen, 
+.green-pen, 
+.black-pen, 
+.grey-pen, 
+.purple-pen, 
+.yellow-pen {
+  color: var(--accent-color);
+  --hr-color: var(--accent-color);
+  --checkbox-color: var(--accent-color);
+}
+
 .yellow,
 .white,
 .blue,
@@ -134,7 +144,6 @@ DIMENSIONAL VARIABLES:
   --checkbox-marker-color: var(--page-color);
   --checkbox-color-hover: var(--accent-color-trans);
   --checkbox-border-color: var(--accent-color);
-  --checklist-done-color: var(--accent-color);
   --interactive-accent: var(--accent-color);
   --metadata-label-text-color: var(--accent-color);
   --metadata-input-text-color: var(--accent-color);
@@ -151,12 +160,6 @@ DIMENSIONAL VARIABLES:
   /* Main Background and Text */
   color: var(--accent-color);
   background-color: var(--page-color);
-}
-
-/* 03: Table Header Styles */
-:is(.white-pen, .yellow-pen, .blue-pen, .grey-pen, .purple-pen, .green-pen) table th {
-  color: var(--accent-color);
-  font-weight: bold;
 }
 
 /* 04.1: Yellow Theme (Paper) */
@@ -238,7 +241,7 @@ DIMENSIONAL VARIABLES:
 .embed-green img { background-color: var(--bg-green); }
 
 
-/* 05: Grid and Row Backgrounds */
+/* 05: Grid, Row and Dots Backgrounds */
 .grid {
   background-image:
     linear-gradient(0deg, transparent 0px, var(--accent-color-trans) 1px, var(--accent-color-trans) 2px, transparent 3px),
@@ -247,13 +250,25 @@ DIMENSIONAL VARIABLES:
 }
 
 .rows {
-  background-image: linear-gradient(0deg, transparent calc(var(--grid-size) - 3px), var(--accent-color-trans) calc(var(--grid-size) - 2px), var(--accent-color-trans) calc(var(--grid-size) - 1px), transparent var(--grid-size));
+  background-image: linear-gradient(0deg, transparent calc(var(--grid-size) - 3px), var(--accent-color-trans) calc(var(--grid-size) - 2px), var(--accent-color) calc(var(--grid-size) - 1px), transparent var(--grid-size));
   background-size: var(--grid-size) var(--grid-size);
+}
+
+.dots {
+  background-image: radial-gradient(
+    circle at center, 
+    var(--accent-color) 1px, 
+    transparent 1px 
+  );
+  background-size: var(--dots-size) var(--dots-size);
 }
 
 /* 06: Styles for Specific Elements 
    06.1: Callout */
-:is(.yellow, .white, .blue, .pink, .grey, .purple, .green, .white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen
+
+:is(.callout > .callout-title, svg) {
+    color: var(--accent-color) !important;
+}:is(.yellow, .white, .blue, .pink, .grey, .purple, .green, .white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen
 ) :is(.callout > .callout-title, svg) {
     color: var(--accent-color) !important;
 }
@@ -266,21 +281,19 @@ DIMENSIONAL VARIABLES:
 :is(.white, .yellow, .blue, .pink, .grey, .purple, .green) :is(code, .HyperMD-codeblock, .cm-inline-code) {
   --code-normal: var(--accent-color);
   --code-background: color-mix(in srgb, var(--page-color) 90%, black) !important;
-}
-:is(.white, .yellow, .blue, .pink, .grey, .purple, .green) div > pre { /* Condizionale al tema */
+}:is(.white, .yellow, .blue, .pink, .grey, .purple, .green) div > pre { 
   --code-background: color-mix(in srgb, var(--page-color) 90%, black) !important;
 }
 
-/* 06.3: Code Blocks con solo Pen (senza tema di pagina) */
+/* Code Blocks con solo Pen (senza tema di pagina) */
 :is(.white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen):not(.white):not(.yellow):not(.blue):not(.pink):not(.grey):not(.purple):not(.green) :is(code, .HyperMD-codeblock, .cm-inline-code) { /* AGGIORNATO */
   --code-normal: var(--accent-color);
 }
 
-/* 07: Pen Colors (Accent Overrides) */
-.white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen {
+/* 06.4: Table Header Styles */
+:is(.white-pen, .yellow-pen, .blue-pen, .grey-pen, .purple-pen, .green-pen, .yellow, .white, .pink, .blue, .grey, .purple, .green) table th {
   color: var(--accent-color);
-  --hr-color: var(--accent-color);
-  --checklist-done-color: var(--accent-color);
+  font-weight: bold;
 }
 
 .white-pen {
@@ -323,4 +336,3 @@ DIMENSIONAL VARIABLES:
   --accent-color-trans: color-mix(in srgb, var(--yellow) 15%, transparent);
   --image-effect: brightness(0) saturate(100%) invert(10%) sepia(70%) saturate(2000%) hue-rotate(50deg) brightness(100%) contrast(90%);
 }
-

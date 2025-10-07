@@ -258,6 +258,10 @@ DIMENSIONAL VARIABLES:
     color: var(--accent-color) !important;
 }
 
+.callout {
+  --callout-blend-mode: normal; 
+}
+
 /* 06.2: Code Blocks */
 :is(.white, .yellow, .blue, .pink, .grey, .purple, .green) :is(code, .HyperMD-codeblock, .cm-inline-code) {
   --code-normal: var(--accent-color);
@@ -319,3 +323,4 @@ DIMENSIONAL VARIABLES:
   --accent-color-trans: color-mix(in srgb, var(--yellow) 15%, transparent);
   --image-effect: brightness(0) saturate(100%) invert(10%) sepia(70%) saturate(2000%) hue-rotate(50deg) brightness(100%) contrast(90%);
 }
+

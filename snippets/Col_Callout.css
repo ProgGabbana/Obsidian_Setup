@@ -1,0 +1,117 @@
+/*
+    Source: https://github.com/efemkay/obsidian-modular-css-layout/blob/main/MCL%20Multi%20Column.css
+*/
+
+body {
+    /* CRITICAL Variables for COLUMN Layout (Used by 'col' callout) */
+    --callout-min-width: 200px; /* Minimum width for an individual column item within the 'col' callout */
+    --callout-gap: 1em; /* Spacing (gap) between the column items */
+    --callout-margin: 0px; /* Margin applied around nested callouts inside a 'col' container */
+
+    /* Variabile per Floating Layout (necessaria solo per il metadata 'menu') */
+    --float-small-width: 300px; /* Width for small floating elements */
+}
+
+/* --------------------------------- */
+/* COLUMN Logic (data-callout="col") */
+/* --------------------------------- */
+
+/* Definizioni comuni per 'col': nasconde titolo e rende il contenuto diretto flex items */
+.callout[data-callout="col"] > .callout-title {
+    display: none;
+}
+.callout[data-callout="col"] > .callout-content {
+    display: contents; /* Fa agire il contenuto come se fosse direttamente nel contenitore */
+}
+
+/* Definisce 'col' come container flex e resetta gli stili di callout predefiniti */
+.callout[data-callout="col"] {
+    display: flex;
+    flex-wrap: wrap; /* Permette il wrapping (colonne) */
+    gap: var(--callout-gap);
+    background: unset;
+    border: unset;
+    margin: unset;
+    padding: unset;
+    clear: both;
+    --callout-blend-mode: normal;
+    --columns: unset;
+}
+
+/* Applica margine a tutti i callout annidati in 'col' */
+.callout[data-callout="col"] .callout {
+    margin: var(--callout-margin); /* Unifica margin-inline e margin-block */
+}
+
+/* Definisce il comportamento delle colonne (figli diretti) */
+.callout[data-callout="col"] > .callout-content > *:is(div, ul, blockquote, p) {
+    /* flex-grow: 1, flex-shrink: 1, flex-basis: var(--callout-min-width) */
+    flex: 1 1 var(--callout-min-width); /* Imposta la larghezza minima */
+    margin: 0; /* Rimuove i margini predefiniti */
+}
+
+/* Metadata 'ctr': Centra il contenitore e impedisce agli elementi di crescere */
+.callout[data-callout="col"][data-callout-metadata*="ctr"].callout {
+    justify-content: center;
+}
+.callout[data-callout="col"][data-callout-metadata*="ctr"].callout > .callout-content > *:is(div, ul, blockquote, p) {
+    flex-grow: 0; /* Impedisce la crescita quando centrato */
+}
+
+/* Applica l'allineamento del testo ai callout annidati con metadata 'ctr' */
+.callout[data-callout="col"] .callout[data-callout-metadata*="ctr"] {
+    text-align: center;
+}
+
+/* Metadata 'no-wrap': Previene il wrapping e consente lo scorrimento orizzontale */
+.callout[data-callout="col"][data-callout-metadata*="no-wrap"].callout {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+}
+.callout[data-callout="col"][data-callout-metadata*="no-wrap"] > .callout-content > *:is(div, ul, blockquote, p) {
+    flex-shrink: 0; /* Impedisce il restringimento */
+}
+
+/* Metadata 'menu': Centratura specifica e dimensioni ridotte */
+.callout[data-callout="col"][data-callout-metadata*="menu"].callout {
+    justify-content: center;
+}
+.callout[data-callout="col"][data-callout-metadata*="menu"].callout > .callout-content > *:is(div,ul) {
+    flex-grow: 0;
+    flex-basis: calc( var(--float-small-width) * 0.5 ); /* Larghezza ridotta */
+}
+
+
+/* ------------------------------------------- */
+/* BLANK Callout Styles (data-callout="blank") */
+/* ------------------------------------------- */
+
+/* Stili del callout 'blank': rimuove tutti gli elementi visivi */
+.callout[data-callout*="blank"].callout {
+    --callout-blend-mode: normal;
+    border: 0 ;
+    padding-top: 0;
+    padding-inline: 5px;
+    background: unset ;
+    box-shadow: unset ;
+    
+    /* Reset variabili per trasparenza/rimozione */
+    --callout-border-color: transparent ;
+    --callout-shadow: none ;
+    --callout-title-background: unset ;
+    --callout-background: unset ;
+    background-color: unset ;
+}
+
+/* Definizioni comuni per 'blank': nasconde titolo e rende il contenuto diretto */
+.callout[data-callout*="blank"] > .callout-title {
+    display: none;
+}
+.callout[data-callout*="blank"] > .callout-content {
+    display: contents;
+}
+
+/* Rimuove i margini top/bottom per il solo paragrafo figlio nel 'blank' */
+.callout[data-callout*="blank"] .callout-content > p:only-child {
+    margin-block: 0;
+}

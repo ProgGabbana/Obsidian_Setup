@@ -1,0 +1,88 @@
+/* Source: https://https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets/blob/Collection/Snippets/Callout%20styling%20-%20Folder%20structure%20callout.md */
+.callout[data-callout="folder"] {
+    --list-indent: 0em;
+    --indentation-guide-color: transparent;
+    overflow: scroll;
+}
+.callout[data-callout="folder"] .list-bullet {
+    display: none;
+}
+.callout[data-callout="folder"] ul {
+    -webkit-margin-after: 0;
+    margin-block-end: 0;
+}
+.callout[data-callout="folder"] li {
+    --list-indent: 1.5em;
+    list-style-type: none;
+    font-family: var(--font-monospace);
+    white-space: nowrap;
+}
+.callout[data-callout="folder"] li li {
+    position: relative;
+    box-sizing: border-box;
+}
+.callout[data-callout="folder"] li li::before,
+.callout[data-callout="folder"] li li::after {
+    content: "";
+    position: absolute;
+    left: -1em;
+    background: var(--list-marker-color);
+}
+.callout[data-callout="folder"] li li::before {
+    top: 0.85em;
+    width: 10px;
+    height: 1.5px;
+    margin: auto;
+}
+.callout[data-callout="folder"] li li::after {
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    height: 100%;
+}
+.callout[data-callout="folder"] li li:last-child::after {
+    height: 0.85em;
+}
+.callout[data-callout="folder"] li .list-collapse-indicator {
+    position: absolute;
+    left: -2em;
+    margin: 0;
+}
+.callout[data-callout="folder"] li em {
+    opacity: 0.5;
+    font-family: var(--font-text);
+}
+.callout[data-callout="folder"] li code {
+    font-size: 1em;
+    font-family: var(--font-monospace);
+    font-style: normal ;
+    background: none;
+    white-space: pre;
+    margin: 0;
+    padding: 0;
+}
+.callout[data-callout="folder"] li mark {
+    font-style:talic;
+    color: #d3a3e5;
+}
+.callout[data-callout="folder"] .callout-content {
+    overflow-x: visible;
+}
+
+.callout[data-callout="folder"] {
+    --callout-icon: lucide-folder-open;
+    --callout-color: var(--background-modifier-border);
+
+    --callout-background: var(--callout-background-default) ;
+    background-color: var(--callout-background-default) ;
+    border-color: var(--background-modifier-border) ;
+    box-shadow: 0 0 0 var(--mcl-card-border-width) var(--background-modifier-border) ;
+}
+
+.callout[data-callout="folder"] > .callout-title {
+    display: flex ;
+    background-color: transparent ;
+    border-bottom: 1px solid var(--callout-color);
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+}

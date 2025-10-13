@@ -1,0 +1,58 @@
+:root {
+  --width: 270px;
+  --outside-padding: 20px;
+  --horizontal-rule-size: 1px;
+  --section-alignment: Center;
+}
+
+.callout[data-callout="infobox"], .callout[data-callout="statbox"] {
+    --callout-icon: lucide-scroll;
+    --callout-color: 255, 128, 0;
+    --callout-blend-mode: normal;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: var(--outside-padding);
+    margin-bottom: var(--outside-padding);
+    border-radius: 12px;
+    border-width: 2px;
+}
+
+.callout[data-callout="infobox"][data-callout-metadata*="locr"],
+.callout[data-callout="statbox"][data-callout-metadata*="locr"] {
+    float: right;
+    width: var(--width);
+    margin-left: var(--outside-padding);
+}
+
+.callout[data-callout="infobox"][data-callout-metadata*="locl"],
+.callout[data-callout="statbox"][data-callout-metadata*="locl"] {
+    float: left;
+    width: var(--width);
+    margin-right: var(--outside-padding);
+}
+
+.callout[data-callout="infobox"] img,
+.callout[data-callout="statbox"] img {
+    max-width: 100%;
+    border-radius: 6px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.callout[data-callout="infobox"] hr {
+    border: none;
+    border-top: var(--horizontal-rule-size) solid var(--horizontal-rule-color, #cccccc);
+    margin: 1rem 0;
+}
+
+.callout[data-callout="infobox"] h1, 
+.callout[data-callout="infobox"] h2, 
+.callout[data-callout="infobox"] h3, 
+.callout[data-callout="infobox"] h4, 
+.callout[data-callout="infobox"] h5, 
+.callout[data-callout="infobox"] h6 {
+    text-align: var(--section-alignment);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}

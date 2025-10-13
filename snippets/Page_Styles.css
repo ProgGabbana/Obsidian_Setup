@@ -1,0 +1,442 @@
+/*
+  Source: https://github.com/CyanVoxel/Obsidian-Notebook-Themes?tab=readme-ov-file
+
+================================================================================
+  SIMPLIFIED CSS TEMPLATE: PAGE & PEN THEME
+================================================================================
+
+This file defines a theming system for pages (backgrounds) and accent colors (pens)
+based on custom CSS variables.
+
+--------------------------------------------------------------------------------
+CLASS SYNTAX AND USAGE
+--------------------------------------------------------------------------------
+
+1. PAGE THEMES (BACKGROUNDS)
+    Defines the background color (--page-color) and the default accent color
+    (--accent-color).
+    - .yellow: Paper/beige background (Light theme).
+    - .white: Pure white background (Light theme).
+    - .blue: Dark blue background (Dark theme).
+    - .pink: Light pink background (Light theme).
+    - .grey: Dark grey background (Dark theme).
+    - .purple: Dark purple background (Dark theme).
+    - .green: Dark green background (Dark theme).
+    - .embed-[theme]: Applies background color to transparent embedded images.
+
+2. PEN COLORS (ACCENT)
+    Overrides the accent color defined by the page theme.
+    - .white-pen, .grey-pen, .black-pen, .red-pen, .green-pen, .blue-pen, .purple-pen, .yellow-pen
+
+3. GRID AND ROW LAYOUT (BACKGROUND PATTERNS)
+    Adds a background pattern.
+    - .grid: Full grid (vertical + horizontal lines).
+    - .rows: Horizontal lines only.
+    - .dots: Dot pattern.
+
+4. UTILITY
+    - .recolor-images: Applies the color filter (--image-effect) to images.
+
+--------------------------------------------------------------------------------
+MAIN CSS VARIABLES
+--------------------------------------------------------------------------------
+
+ACCENT/PEN VARIABLES:
+- --accent-color: Primary color for text, borders, etc.
+- --accent-color-trans: Transparent version of --accent-color.
+- --image-effect: CSS filter for recoloring images.
+
+BACKGROUND/PAGE VARIABLES:
+- --page-color: The primary background color of the page.
+- --bg-white, --bg-yellow, --bg-blue, --bg-pink, --bg-darkgrey, --bg-purple, --bg-green: Base page colors.
+
+DIMENSIONAL VARIABLES:
+- --dots-size, --grid-size, --gridmil-size: Standard sizes for background patterns.
+================================================================================
+*/
+
+/**
+* 00: BASE VARIABLES & DIMENSIONS
+* Defines all base colors and standard dimensions.
+*/
+:root {
+  /* Base Pen Colors */
+  --white: #edf1fc;
+  --grey: #5f5d58;
+  --black: #26241f;
+  --red: #b31702;
+  --green: #15b64f;
+  --blue: #3f76ed;
+  --light-blue: #54b6f8;
+  --purple: #9b4ff0;
+  --yellow: #f3d03c; /* Readded */
+
+  --neutral-black: #272727;
+  --neutral-black-trans: #27272722;
+
+  /* Page Background Colors */
+  --bg-white: #ffffff;
+  --bg-yellow: #f3deaf;
+  --bg-blue: #3f76ed;
+  --bg-pink: #ffe6f0;
+  --bg-darkgrey: #303030;
+  --bg-purple: #3f2a58;
+  --bg-green: #1d331d;
+
+  /* Standard Dimensions */
+  --dots-size: 25px;
+  --grid-size: 15px;
+  --gridmil-size: 7px;
+}
+
+/**
+* 01: COMMON STYLES FOR ALL THEMES AND PENS
+*/
+
+/* General settings for theme classes */
+.yellow, .white, .blue, .pink, .grey, .purple, .green {
+  /* Text and Heading Colors - inherit from --accent-color */
+  --text-normal: var(--accent-color);
+  --text-muted: var(--accent-color);
+  --text-faint: var(--accent-color-trans);
+  --h1-color: var(--accent-color);
+  --h2-color: var(--accent-color);
+  --h3-color: var(--accent-color);
+  --h4-color: var(--accent-color);
+  --h5-color: var(--accent-color);
+  --h6-color: var(--accent-color);
+
+  /* Links - specific colors to ensure visibility */
+  --link-color: var(--blue);
+  --link-color-hover: var(--light-blue);
+  --link-unresolved-color: var(--red);
+
+  /* Structural/Interactive Elements */
+  --hr-color: var(--accent-color);
+  --blockquote-border-color: var(--accent-color);
+  --embed-border-left: 2px solid var(--accent-color);
+  --collapse-icon-color-collapsed: var(--accent-color);
+  --list-marker-color: var(--accent-color);
+  --checkbox-color: var(--accent-color);
+  --checkbox-marker-color: var(--page-color);
+  --checkbox-color-hover: var(--accent-color-trans);
+  --checkbox-border-color: var(--accent-color);
+  --interactive-accent: var(--accent-color);
+  --metadata-label-text-color: var(--accent-color);
+  --metadata-input-text-color: var(--accent-color);
+  --metadata-input-background-active: var(--accent-color-trans);
+
+  /* Tag and Hover States */
+  --tag-color: var(--accent-color);
+  --tag-background: var(--accent-color-trans);
+  --pill-cover-hover: color-mix(in srgb, var(--accent-color) 60%, transparent);
+  --background-modifier-border-focus: var(--accent-color);
+  --background-modifier-border: var(--accent-color-trans);
+  --background-modifier-hover: color-mix(in srgb, var(--accent-color) 60%, transparent);
+
+  /* Main Page Colors */
+  color: var(--accent-color);
+  background-color: var(--page-color);
+}
+
+/* Common accent color application for all Pen classes */
+.white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen {
+  color: var(--accent-color);
+  --hr-color: var(--accent-color);
+  --checkbox-color: var(--accent-color);
+}
+
+
+/**
+* 02: PAGE THEMES (BACKGROUNDS & DEFAULT ACCENT)
+*/
+
+/* 02.1: Yellow Theme (Paper/Light) */
+.yellow {
+  --page-color: var(--bg-yellow);
+  --accent-color: var(--black);
+  --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(14%) sepia(19%) saturate(296%) hue-rotate(5deg) brightness(90%) contrast(96%);
+  color-scheme: light;
+}
+.embed-yellow img { background-color: var(--bg-yellow); }
+
+/* 02.2: White Theme (Pure White/Light) */
+.white {
+  --page-color: var(--bg-white);
+  --accent-color: var(--neutral-black);
+  --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(14%) sepia(19%) saturate(296%) hue-rotate(5deg) brightness(90%) contrast(96%);
+  color-scheme: light;
+}
+.embed-white img { background-color: var(--bg-white); }
+
+/* 02.3: Blue Theme (Dark) */
+.blue {
+  --page-color: var(--bg-blue);
+  --accent-color: var(--white);
+  --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(89%) sepia(1%) saturate(2714%) hue-rotate(196deg) brightness(107%) contrast(98%);
+  color-scheme: dark;
+  --link-color: color-mix(in srgb, var(--light-blue) 60%, var(--white));
+  --link-color-hover: color-mix(in srgb, var(--light-blue) 20%, var(--white));
+}
+.embed-blue img { background-color: var(--bg-blue); }
+
+/* 02.4: Pink Theme (Light) */
+.pink {
+  --page-color: var(--bg-pink);
+  --accent-color: var(--black);
+  --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(14%) sepia(19%) saturate(296%) hue-rotate(5deg) brightness(90%) contrast(96%);
+  color-scheme: light;
+}
+.embed-pink img { background-color: var(--bg-pink); }
+
+/* 02.5: Grey Theme (Dark) */
+.grey {
+  --page-color: var(--bg-darkgrey);
+  --accent-color: var(--white);
+  --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(89%) sepia(1%) saturate(2714%) hue-rotate(196deg) brightness(107%) contrast(98%);
+  color-scheme: dark;
+  --link-color: color-mix(in srgb, var(--light-blue) 60%, var(--white));
+  --link-color-hover: color-mix(in srgb, var(--light-blue) 20%, var(--white));
+}
+.embed-grey img { background-color: var(--bg-darkgrey); }
+
+/* 02.6: Purple Theme (Dark) */
+.purple {
+  --page-color: var(--bg-purple);
+  --accent-color: var(--white);
+  --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(89%) sepia(1%) saturate(2714%) hue-rotate(196deg) brightness(107%) contrast(98%);
+  color-scheme: dark;
+  --link-color: color-mix(in srgb, var(--light-blue) 60%, var(--white));
+  --link-color-hover: color-mix(in srgb, var(--light-blue) 20%, var(--white));
+}
+.embed-purple img { background-color: var(--bg-purple); }
+
+/* 02.7: Green Theme (Dark) */
+.green {
+  --page-color: var(--bg-green);
+  --accent-color: var(--white);
+  --accent-color-trans: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(89%) sepia(1%) saturate(2714%) hue-rotate(196deg) brightness(107%) contrast(98%);
+  color-scheme: dark;
+  --link-color: color-mix(in srgb, var(--light-blue) 60%, var(--white));
+  --link-color-hover: color-mix(in srgb, var(--light-blue) 20%, var(--white));
+}
+.embed-green img { background-color: var(--bg-green); }
+
+
+/**
+* 03: PEN COLORS (ACCENT OVERRIDES)
+*/
+
+.white-pen {
+  --accent-color: var(--white);
+  --accent-color-trans: color-mix(in srgb, var(--white) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(89%) sepia(1%) saturate(2714%) hue-rotate(196deg) brightness(107%) contrast(98%);
+}
+.blue-pen {
+  --accent-color: var(--blue);
+  --accent-color-trans: color-mix(in srgb, var(--blue) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(36%) sepia(95%) saturate(945%) hue-rotate(199deg) brightness(95%) contrast(95%);
+}
+.red-pen {
+  --accent-color: var(--red);
+  --accent-color-trans: color-mix(in srgb, var(--red) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(40%) sepia(41%) saturate(1024%) hue-rotate(316deg) brightness(99%) contrast(94%);
+}
+.green-pen {
+  --accent-color: var(--green);
+  --accent-color-trans: color-mix(in srgb, var(--green) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(52%) sepia(60%) saturate(2521%) hue-rotate(105deg) brightness(96%) contrast(84%);
+}
+.black-pen {
+  --accent-color: var(--black);
+  --accent-color-trans: color-mix(in srgb, var(--black) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(14%) sepia(19%) saturate(296%) hue-rotate(5deg) brightness(90%) contrast(96%);
+}
+.grey-pen {
+  --accent-color: var(--grey);
+  --accent-color-trans: color-mix(in srgb, var(--grey) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(35%) sepia(13%) saturate(189%) hue-rotate(5deg) brightness(96%) contrast(86%);
+}
+.purple-pen {
+  --accent-color: var(--purple);
+  --accent-color-trans: color-mix(in srgb, var(--purple) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(33%) sepia(59%) saturate(2620%) hue-rotate(249deg) brightness(98%) contrast(93%);
+}
+.yellow-pen {
+  --accent-color: var(--yellow);
+  --accent-color-trans: color-mix(in srgb, var(--yellow) 15%, transparent);
+  --image-effect: brightness(0) saturate(100%) invert(10%) sepia(70%) saturate(2000%) hue-rotate(50deg) brightness(100%) contrast(90%);
+}
+
+
+/**
+* 04: BACKGROUND PATTERNS (GRID, ROWS, DOTS)
+* Uses --accent-color-trans for a subtle effect over --page-color.
+*/
+
+/* Full grid (vertical + horizontal lines) */
+.grid {
+  background-image:
+    linear-gradient(0deg, transparent 0px, var(--accent-color-trans) 1px, var(--accent-color-trans) 2px, transparent 3px),
+    linear-gradient(90deg, transparent calc(var(--grid-size) - 3px), var(--accent-color-trans) calc(var(--grid-size) - 2px), var(--accent-color-trans) calc(var(--grid-size) - 1px), transparent var(--grid-size));
+  background-size: var(--grid-size) var(--grid-size);
+}
+
+/* Horizontal lines only */
+.rows {
+  background-image: linear-gradient(0deg, transparent calc(var(--grid-size) - 3px), var(--accent-color-trans) calc(var(--grid-size) - 2px), var(--accent-color) calc(var(--grid-size) - 1px), transparent var(--grid-size));
+  background-size: var(--grid-size) var(--grid-size);
+}
+
+/* Dot pattern */
+.dots {
+  background-image: radial-gradient(
+    circle at center,
+    var(--accent-color) 1px,
+    transparent 1px
+  );
+  background-size: var(--dots-size) var(--dots-size);
+}
+
+
+/* 05: ELEMENT-SPECIFIC STYLES */
+
+/* 05.1: Image Recolor Utility */
+.recolor-images img {
+  filter: var(--image-effect);
+}
+
+/* 05.2: Image Display */
+.markdown-preview-view img,
+img {
+  max-width: 100%;
+  border-radius: 6px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 05.3: Callout Styles (Title/Icon color) */
+:is(.callout > .callout-title, svg) {
+    color: var(--accent-color);
+}
+/* Ensure Callout Title/SVG color applies when using a theme or just a pen */
+:is(.yellow, .white, .blue, .pink, .grey, .purple, .green, .white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen) :is(.callout > .callout-title, svg) {
+    color: var(--accent-color);
+}
+
+/* Callout border and blend mode */
+.callout {
+  --callout-blend-mode: normal;
+  border-radius: 12px;
+  border-width: 2px;  
+}
+
+.callout p {
+  /* Ensure no extra margin inside callouts */
+  margin: 0;
+}
+
+/* 05.4: Code Blocks - General Styling */
+/* Applies accent color to code text and a mixed background based on page color */
+:is(.white, .yellow, .blue, .pink, .grey, .purple, .green) :is(code, .HyperMD-codeblock, .cm-inline-code) {
+  --code-normal: var(--accent-color);
+  --code-background: color-mix(in srgb, var(--page-color) 90%, black);
+}
+:is(.white, .yellow, .blue, .pink, .grey, .purple, .green) div > pre {
+  --code-background: color-mix(in srgb, var(--page-color) 90%, black);
+}
+
+/* Code Blocks with only a Pen (no page theme) */
+:is(.white-pen, .blue-pen, .red-pen, .green-pen, .black-pen, .grey-pen, .purple-pen, .yellow-pen):not(.white):not(.yellow):not(.blue):not(.pink):not(.grey):not(.purple):not(.green) :is(code, .HyperMD-codeblock, .cm-inline-code) {
+  --code-normal: var(--accent-color);
+}
+
+/* Source: https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets/blob/Collection/Snippets/Code%20block%20styling%2001.md */
+/* Code Block Border Styling (Reading View) */
+.markdown-rendered pre {
+  /* Use modifier border color for consistency */
+  border: solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-lm-only);
+  background: transparent ; /* Makes background transparent */
+}
+
+/* Code Block Border Styling (Live Preview) */
+/* Top Border */
+.cm-s-obsidian div.HyperMD-codeblock-begin-bg {
+  background: transparent ; /* Makes background transparent */
+  border-top: solid var(--background-modifier-border); /* Dynamic top border color */
+  /* stylelint-disable-next-line declaration-no-important */
+  border-top-right-radius: 8px ;
+  /* stylelint-disable-next-line declaration-no-important */
+  border-top-left-radius: 8px ;
+  margin-top: 8px;
+}
+/* Bottom Border */
+.cm-s-obsidian div.HyperMD-codeblock-end-bg {
+  background: transparent ; /* Makes background transparent */
+  border-bottom: solid var(--background-modifier-border); /* Dynamic bottom border color */
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+/* Side Borders */
+.cm-s-obsidian div.HyperMD-codeblock-bg {
+  border-right: solid var(--background-modifier-border);
+  border-left: solid var(--background-modifier-border);
+  background: transparent ; /* Makes background transparent */
+}
+
+/* 05.5: Table Styles */
+/* Table Header Styles (Color) */
+:is(.white-pen, .yellow-pen, .blue-pen, .grey-pen, .purple-pen, .green-pen, .yellow, .white, .pink, .blue, .grey, .purple, .green) table th {
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+table, .table-wrapper {
+  margin-inline: auto;
+}
+
+/* Table Border and Corner Styling (from user-provided code) */
+/* Source: https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets/blob/Collection/Snippets/Table%20styling%20-%20Rounded%20corners.md */
+:root table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+th:first-of-type {
+  border-top-left-radius: 8px;
+}
+th:last-of-type {
+  border-top-right-radius: 8px;
+}
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 8px;
+}
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 8px;
+}
+:root :is(td, th) {
+  /* NOTE: This relies on a potentially external --table-border-width variable */
+  border-width: 0 var(--table-border-width) var(--table-border-width) 0;
+}
+
+/* 05.6: Header Alignment Utility (Center) */
+.hc :is(
+  h1, h2, h3, h4, h5, h6,
+  .HyperMD-header.HyperMD-header-1,
+  .HyperMD-header.HyperMD-header-2,
+  .HyperMD-header.HyperMD-header-3,
+  .HyperMD-header.HyperMD-header-4,
+  .HyperMD-header.HyperMD-header-5,
+  .HyperMD-header.HyperMD-header-6
+) {
+  text-align: center;
+}

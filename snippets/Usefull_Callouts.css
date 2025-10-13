@@ -1,0 +1,25 @@
+.callout[data-callout="theorem"] {
+  --callout-color: 158, 158, 158;
+  --callout-icon: lucide-square-sigma;
+}
+
+.callout[data-callout="finance"] {
+  --callout-color: 68, 207, 110;
+  --callout-icon: lucide-piggy-bank;
+}
+
+.callout[data-callout="idea"] {
+    --callout-color: 255, 255, 0;
+    --callout-icon: lucide-lightbulb;
+}
+
+.callout[data-callout="graph"] {
+    --callout-color: 83, 223, 221;
+    --callout-icon: lucide-chart-area;
+}
+
+.callout[data-callout="algorithm"] {
+    --callout-color: 158, 158, 158;
+    --callout-icon: lucide-code;
+}
+

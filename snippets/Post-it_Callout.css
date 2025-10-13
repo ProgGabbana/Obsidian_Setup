@@ -1,0 +1,49 @@
+/* ---------------------------------------------------- */
+/* 1. BASE VARIABLES AND CONTAINER SETTINGS             */
+/* ---------------------------------------------------- */
+:root {
+	/* Sidenote Styles */
+	--width: 15em;        /* Maximum width of the sidenote */
+	--gap: 1rem;          /* Space between main content and sidenote */
+}
+
+/* Define the Markdown view as a container for query use */
+.markdown-preview-view {
+  container-name: page;
+  container-type: inline-size;
+}
+
+.callout[data-callout="post-it"] {
+    --callout-icon: lucide-pin;
+    --callout-color: 255, 255, 0;
+}
+
+/* ---------------------------------------------------- */
+/* 2. POST-IT LOGIC: STATIC SIDELINING                  */
+/* (ACTIVE ONLY ON WIDE SCREENS > 1200px)             */
+/* ---------------------------------------------------- */
+
+@container page (width > 1200px) {
+
+    /* Right Side Position: Static Sidelining */
+    .callout[data-callout="post-it"] {
+        /* ESSENTIAL for lateral positioning */
+        position: absolute;
+        width: var(--width);
+        text-align: left; /* Standard alignment for right-side notes */
+
+        /* Position to the Right */
+        /* Shifts from the main content width (var(--file-line-width)) + the gap (var(--gap)) */
+        margin-left: calc(var(--file-line-width) + var(--gap));
+    }
+
+    /* Left Side Position: Static Sidelining (using metadata "locl" - for "local left") */
+    .callout[data-callout="post-it"]:is([data-callout-metadata~=locl]) {
+        text-align: right; /* Right alignment for left-side notes */
+        margin: unset;
+        /* Shifts negatively (left) by note width + gap */
+        margin-left: calc(-1 * (var(--max-width) + var(--gap)));
+        transform: none;
+    }
+
+} /* END @container */

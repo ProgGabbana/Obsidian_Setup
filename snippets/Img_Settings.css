@@ -1,0 +1,214 @@
+/*
+    Source: https://github.com/SlRvb/Obsidian--ITS-Theme/blob/main/Snippets/S%20-%20Images%20Adjustments.css
+    Modificato per rimuovere il supporto alla sintassi "relative" e la "x" finale dai tag di dimensione.
+*/
+
+body {
+    /* Variabili di dimensione per le immagini (valori assoluti) */
+    --micro: 70px;
+    --tiny: 100px;
+    --small: 200px;
+    --small-med: 300px;
+    --med-small: 400px;
+    --medium: 500px;
+    --med-tall: 600px;
+    --tall: 700px;
+}
+
+.popover.hover-popover {
+    --micro: 70px;
+    --tiny: 100px;
+    --small: 150px;
+    --small-med: 200px;
+    --med-small: 250px;
+    --medium: 300px;
+    --med-tall: 450px;
+    --tall: 500px;
+}
+
+@media (max-width: 500px) {
+    body {
+        --radius: 0px;
+        --micro: 70px;
+        --tiny: 100px;
+        --small: 150px;
+        --small-med: 200px;
+        --med-small: 250px;
+        --medium: 300px;
+        --med-tall: 450px;
+        --tall: 500px;
+    }
+}
+
+/* Modifica i selettori: rimuovi la 'x' finale nei tag */
+.view-content img[alt]:is([alt*=w7],
+[alt*=w10],
+[alt*=w20],
+[alt*=w30],
+[alt*=w40],
+[alt*=w50],
+[alt*=w60],
+[alt*=w70],
+[alt*=wfull]) {
+    width: var(--image-adj-size-w);
+}
+.view-content img[alt]:is([alt*=h7],
+[alt*=h10],
+[alt*=h20],
+[alt*=h30],
+[alt*=h40],
+[alt*=h50],
+[alt*=h60],
+[alt*=h70],
+[alt*=hfull]) {
+    height: var(--image-adj-size-h);
+}
+
+/* Regole per l'altezza (h) - Modifica: Rimosso 'x' */
+.view-content img[alt][alt*=h7] {
+    --image-adj-size-h: var(--micro);
+}
+.view-content img[alt][alt*=h10] {
+    --image-adj-size-h: var(--tiny);
+}
+.view-content img[alt][alt*=h20] {
+    --image-adj-size-h: var(--small);
+}
+.view-content img[alt][alt*=h30] {
+    --image-adj-size-h: var(--small-med);
+}
+.view-content img[alt][alt*=h40] {
+    --image-adj-size-h: var(--med-small);
+}
+.view-content img[alt][alt*=h50] {
+    --image-adj-size-h: var(--medium);
+}
+.view-content img[alt][alt*=h60] {
+    --image-adj-size-h: var(--med-tall);
+}
+.view-content img[alt][alt*=h70] {
+    --image-adj-size-h: var(--tall);
+}
+.view-content img[alt][alt*=hfull] {
+    --image-adj-size-h: 100%;
+}
+
+/* Regole per la larghezza (w) - Modifica: Rimosso 'x' */
+.view-content img[alt][alt*=w7] {
+    --image-adj-size-w: var(--micro);
+}
+.view-content img[alt][alt*=w10] {
+    --image-adj-size-w: var(--tiny);
+}
+.view-content img[alt][alt*=w20] {
+    --image-adj-size-w: var(--small);
+}
+.view-content img[alt][alt*=w30] {
+    --image-adj-size-w: var(--small-med);
+}
+.view-content img[alt][alt*=w40] {
+    --image-adj-size-w: var(--med-small);
+}
+.view-content img[alt][alt*=w50] {
+    --image-adj-size-w: var(--medium);
+}
+.view-content img[alt][alt*=w60] {
+    --image-adj-size-w: var(--med-tall);
+}
+.view-content img[alt][alt*=w70] {
+    --image-adj-size-w: var(--tall);
+}
+.view-content img[alt][alt*=wfull] {
+    --image-adj-size-w: 100%;
+}
+
+.image-embed,
+div:not(.image-embed) > img {
+    display: block;
+    margin: auto;
+    max-height: 100%;
+}
+
+.markdown-rendered img[alt~=locl],
+.markdown-rendered img[src*="#locl"],
+.markdown-rendered .image-embed[alt~=locl],
+.markdown-rendered .image-embed[src*="#locl"] {
+    float: inline-start;
+    margin-right: 2%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+img[alt~=locl],
+.image-embed[alt~=locl],
+img[src*="#locl"],
+.image-embed[src*="#locl"] {
+    float: left ;
+    margin-right: 2%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+.markdown-rendered img[alt~=locr],
+.markdown-rendered img[src*="#locr"],
+.markdown-rendered .image-embed[alt~=locr],
+.markdown-rendered .image-embed[src*="#locr"] {
+    float: inline-end;
+    margin-left: 2%;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+img[alt~=locr],
+.image-embed[alt~=locr],
+img[src*="#locr"],
+.image-embed[src*="#locr"] {
+    float: right ;
+    margin-left: 2%;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.image-captions .image-embed::after,
+.image-embed[src*="#cap"]::after {
+    content: attr(alt);
+    color: gray;
+    display: block;
+    text-align: center;
+}
+
+.image-embed[src*="#cap"] {
+    display: inline-block;
+}
+
+.image-embed[src*="#cap"] img {
+    float: unset ;
+}
+
+/* Regole per didascalie - Modifica: Rimosso 'x' */
+.image-embed[src*="#cap"][src*="#h7"] img { height: var(--micro); }
+.image-embed[src*="#cap"][src*="#h10"] img { height: var(--tiny); }
+.image-embed[src*="#cap"][src*="#h20"] img { height: var(--small); }
+.image-embed[src*="#cap"][src*="#h30"] img { height: var(--small-med); }
+.image-embed[src*="#cap"][src*="#h40"] img { height: var(--med-small); }
+.image-embed[src*="#cap"][src*="#h50"] img { height: var(--medium); }
+.image-embed[src*="#cap"][src*="#h60"] img { height: var(--med-tall); }
+.image-embed[src*="#cap"][src*="#h70"] img { height: var(--tall); }
+.image-embed[src*="#cap"][src*="#hfull"] img { height: 100%; }
+
+.image-embed[src*="#cap"][src*="#w7"], .image-embed[src*="#cap"][src*="#w7"] img { width: var(--micro); }
+.image-embed[src*="#cap"][src*="#w10"], .image-embed[src*="#cap"][src*="#w10"] img { width: var(--tiny); }
+.image-embed[src*="#cap"][src*="#w20"], .image-embed[src*="#cap"][src*="#w20"] img { width: var(--small); }
+.image-embed[src*="#cap"][src*="#w30"], .image-embed[src*="#cap"][src*="#w30"] img { width: var(--small-med); }
+.image-embed[src*="#cap"][src*="#w40"], .image-embed[src*="#cap"][src*="#w40"] img { width: var(--med-small); }
+.image-embed[src*="#cap"][src*="#w50"], .image-embed[src*="#cap"][src*="#w50"] img { width: var(--medium); }
+    .image-embed[src*="#cap"][src*="#w60"], .image-embed[src*="#cap"][src*="#w60"] img { width: var(--med-tall); }
+    .image-embed[src*="#cap"][src*="#w70"], .image-embed[src*="#cap"][src*="#w70"] img { width: var(--tall); }
+    .image-embed[src*="#cap"][src*="#wfull"], .image-embed[src*="#cap"][src*="#wfull"] img { width: 100%; }
+
+.mobile-image-viewer img[alt] {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}

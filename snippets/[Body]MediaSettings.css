@@ -41,7 +41,7 @@ body {
 }
 
 /* Modifica i selettori: rimuovi la 'x' finale nei tag */
-.view-content img[alt]:is([alt*=w7],
+.view-content  img[alt]:is([alt*=w7],
 [alt*=w10],
 [alt*=w20],
 [alt*=w30],
@@ -171,10 +171,10 @@ img[src*="#locr"],
 }
 
 /* ---------------------------------------------------------------------- */
-/* CORREZIONE: ANIMAZIONE FLUIDA (TRANSITION E OPACITY) */
+/* SEZIONE RIMOSSA: CODICE PER MOSTRARE LA CAPTION AL CENTRO SULL'HOVER */
 /* ---------------------------------------------------------------------- */
 
-/* 1. Regole di base per la descrizione (invisibile di default) */
+/*
 .internal-embed.image-embed::after,
 .image-embed[src*="#cap"]::after {
     content: attr(alt);
@@ -190,26 +190,55 @@ img[src*="#locr"],
     z-index: 10;
     pointer-events: none;
     
-    /* MODIFICHE PER L'ANIMAZIONE FLUIDA */
-    opacity: 0; /* Rendi invisibile di default */
-    visibility: hidden; /* Nascondi l'elemento (importante per il flusso) */
-    /* Aggiungi una transizione fluida per l'opacità */
+    // MODIFICHE PER L'ANIMAZIONE FLUIDA
+    opacity: 0;
+    visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; 
 }
 
 
-/* 2. Il contenitore dell'immagine deve avere position: relative; */
 .internal-embed.image-embed,
 .image-embed[src*="#cap"] {
   position: relative;
 }
 
-/* 3. Regola Hover (Rendi visibile e opaco al passaggio del mouse) */
+
 .internal-embed.image-embed:hover::after,
 .image-embed[src*="#cap"]:hover::after {
-    /* Il contenuto è ereditato dalla regola base, ma lo rendiamo visibile */
+    opacity: 1;
+    visibility: visible;
+}
+*/
+
+/* ---------------------------------------------------------------------- */
+/* NUOVE REGOLE PER MOSTRARE LA CAPTION SOTTO L'IMMAGINE ALL'HOVER */
+/* ---------------------------------------------------------------------- */
+
+/* La caption è contenuta nell'attributo 'alt' per le immagini markdown e nell'attributo 'alt' o 'src' (con #cap) per gli embed. */
+/* Per gli embed, l'elemento .image-embed contiene l'immagine. Usiamo un :after sul contenitore. */
+
+/* Regola base per la caption: usiamo content: attr(alt) per estrarla */
+.internal-embed.image-embed::after,
+.image-embed[src*="#cap"]::after {
+    content: attr(alt);
+    display: none; /* Nascondi di default */
+    text-align: center;
+    padding: 5px 0;
+    font-size: 0.85em;
+    color: var(--text-muted); /* Colore per la caption */
+    /* Assicura che l'elemento non interagisca con il mouse quando nascosto */
+    pointer-events: none; 
+    
+    /* Regole per la transizione fluida (opzionale) */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; 
+}
+
+/* Regola Hover: Rendi visibile la caption sotto l'immagine */
+.internal-embed.image-embed:hover::after,
+.image-embed[src*="#cap"]:hover::after {
+    display: block; /* Mostra la caption */
     opacity: 1; /* Rendi completamente visibile */
-    visibility: visible; /* Rendi l'elemento visibile */
 }
 
 /* ---------------------------------------------------------------------- */
@@ -218,6 +247,9 @@ img[src*="#locr"],
 
 .image-embed[src*="#cap"] {
     display: inline-block;
+    /* Rimuoviamo position: relative se non serve per la caption, ma era nel codice originale e potrebbe essere necessaria per altri scopi. */
+    /* Assicuriamoci che non entri in conflitto con lo zoom */
+    position: relative;
 }
 
 .image-embed[src*="#cap"] img {
@@ -249,4 +281,60 @@ img[src*="#locr"],
     height: 100%;
     width: 100%;
     object-fit: contain;
+}
+
+/* ---------------------------------------------------------------------- */
+/* FUNZIONALITA' AGGIUNTA: Zoom-in/Zoom-out al click e al mantenimento della pressione */
+/*
+author: Kepano
+source: https://forum.obsidian.md/t/image-zoom-click-hold-to-expand-images/5164?u
+*/
+
+.view-content img {
+    max-width: 100%;
+    cursor: zoom-in;
+}
+
+.view-content img:active {
+    cursor: zoom-out;
+}
+.view-content .markdown-preview-view img[referrerpolicy="no-referrer"]:active,
+.view-content .image-embed:active {
+    background: var(--background-primary);
+    cursor: zoom-out;
+    display: block;
+    z-index: 200;
+    position: fixed;
+    max-height: 100%;
+    max-width: 100%;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Regola aggiunta/modificata per nascondere la caption quando l'immagine è in zoom (:active) */
+.view-content .image-embed:active::after {
+    display: none;
+    opacity: 0;
+}
+
+.view-content .image-embed:active img {
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-height: 100vh;
+    object-fit: contain;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    opacity: 1;
 }

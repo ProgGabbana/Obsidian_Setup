@@ -1,0 +1,28 @@
+/* Source: https://forum.obsidian.md/t/hiding-hashtags-but-again/61706?u= */
+/* Hide hashtag (reading mode) */
+a.tag {
+  font-family: "Formular", var(--font-text);
+  padding: 9px 0.55em 5px 0;
+}
+a.tag:hover {
+  padding: 5px 7px 5px 7px !important;
+  font-family: var(--font-text);
+}
+
+/* Hide hashtag (live preview mode) */
+.cm-line:not(.cm-active) .cm-hashtag-begin {
+  display: none;
+}
+.cm-line:not(.cm-active) .cm-hashtag-end {
+  border-radius: var(--tag-radius) !important;
+  padding-left: var(--tag-padding-x);
+  border-left: var(--tag-border-width) solid var(--tag-border-color);
+}
+
+/* prevent overlapping tags on separate lines */
+p:has(.tag ~ br ~ .tag) {
+  line-height: 2;
+}
+.cm-line:has(.cm-meta):has(+ .cm-line .cm-meta) {
+  padding-bottom: 6px;
+}

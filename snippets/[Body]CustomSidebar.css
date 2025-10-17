@@ -1,5 +1,45 @@
-/* Source: https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets/blob/Collection/Snippets/Hide%20ribbon%20on%20collapse.md */
+/* Source: https://github.com/replete/obsidian-minimal-theme-css-snippets */
+/* Workspace: Sidebar navigation */
+[data-type=file-explorer] {
+    .nav-header {
+        padding-left:14px;
+        padding-bottom:3px;
+        padding-top: 6px;
 
+        .nav-buttons-container {
+            opacity:0.7;
+            transition: .2s opacity ease-in;
+
+            &:hover {
+                opacity:1;
+            }
+        }
+    }
+}
+
+.workspace-leaf-content[data-type=file-explorer] {
+
+	> .nav-header {
+		transition: all 0.2s ease-in-out;
+		opacity:0;
+		margin-bottom:-4px;
+
+		&:not(:hover, :focus-within) {
+			height: 3px !important;
+			overflow: hidden;
+		}
+
+		&:hover,
+		&:focus-within {
+			opacity:1;
+			height: 36px !important; /* suits compact file explorer */
+		}
+	}
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+/* Source: https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets/blob/Collection/Snippets/Hide%20ribbon%20on%20collapse.md */
 /* Immersive Ribbon Menu */
 .workspace-ribbon.mod-left {
   background-color: transparent; /*c myn: hides weird flashing in default theme when opening */

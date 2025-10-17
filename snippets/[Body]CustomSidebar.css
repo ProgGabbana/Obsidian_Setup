@@ -1,5 +1,6 @@
-/* Source: https://github.com/replete/obsidian-minimal-theme-css-snippets */
-/* Workspace: Sidebar navigation */
+/* ---------------------------------------------------------------------------------- */
+/* Source 1: https://github.com/replete/obsidian-minimal-theme-css-snippets */
+/* Workspace: Sidebar navigation (Header Fade-in) */
 [data-type=file-explorer] {
     .nav-header {
         padding-left:14px;
@@ -39,7 +40,30 @@
 
 /* ---------------------------------------------------------------------------------- */
 
-/* Source: https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets/blob/Collection/Snippets/Hide%20ribbon%20on%20collapse.md */
+/* Ultra Compact Sidebar (NEW FEATURE)
+    Source: https://github.com/replete/obsidian-minimal-theme-css-snippets
+    Resizes to previous set width on hover, and shrinks to 135px when not hovered.
+*/
+.mod-sidedock.mod-left-split {
+    transition: .1s width ease-in-out;
+
+    /* fade sidebar nav icons nicer */
+    .sidebar-toggle-button.mod-left {
+        position:absolute;
+        right:5px;
+        background:linear-gradient(90deg, transparent, var(--bg2) 40%);
+    }
+
+    &:not(:is(:hover, :focus-within)) {
+        /* sidebar shrinks if not hovered */
+        width:135px !important;
+        transition: .1s width ease-in-out;
+    }
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+/* Source 2: https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets/blob/Collection/Snippets/Hide%20ribbon%20on%20collapse.md */
 /* Immersive Ribbon Menu */
 .workspace-ribbon.mod-left {
   background-color: transparent; /*c myn: hides weird flashing in default theme when opening */
@@ -55,20 +79,21 @@
       border-bottom-color: var(--tab-outline-color);
       transition: all 0.2s ease-in-out;
     }
-    &:hover > :nth-child(n + 2) {
-      opacity: 1;
-      transition: all 0.2s ease-in-out;
-    }
     &:not(:hover) > :nth-child(n + 2) {
       opacity: 0;
+      transition: all 0.2s ease-in-out;
+    }
+    &:hover > :nth-child(n + 2) { /* Aggiunto :hover per mostrare le icone */
+      opacity: 1;
       transition: all 0.2s ease-in-out;
     }
   }
 }
 
-/* Immersive Sidebar Collapse */
+/* Immersive Sidebar Collapse (Contenuto interno scompare/riappare) */
 .workspace-split.mod-horizontal:is(.mod-left-split, .mod-right-split) {
   &.is-sidedock-collapsed {
+    /* Nasconde gli elementi interni della sidebar quando collassata */
     .workspace-tabs .workspace-tab-header-container,
     .workspace-tabs .workspace-tab-container,
     .workspace-tabs .workspace-leaf-resize-handle,
@@ -77,9 +102,23 @@
       transition: all 0.2s ease-in-out;
     }
     .workspace-tabs.mod-top .workspace-tab-header-container {
-      opacity: 1;
+      opacity: 1; /* Mantiene visibile l'header superiore quando collassato */
     }
   }
+}
+
+/* Regola Hover per la sidebar collassata (riapparizione del contenuto) */
+.workspace-split.mod-horizontal:is(.mod-left-split, .mod-right-split).is-sidedock-collapsed:hover {
+    .workspace-tabs .workspace-tab-header-container,
+    .workspace-tabs .workspace-tab-container,
+    .workspace-tabs .workspace-leaf-resize-handle,
+    .workspace-tabs.mod-top .workspace-tab-header-inner {
+        opacity: 1; /* Mostra gli elementi interni */
+        transition: all 0.2s ease-in-out;
+    }
+    .workspace-tabs.mod-top .workspace-tab-header-container {
+      opacity: 1;
+    }
 }
 
 /* ------------------------------------------------ */

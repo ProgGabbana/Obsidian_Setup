@@ -1,0 +1,15 @@
+/* Source: https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets/blob/Collection/Snippets/Properties%20into%20two%20columns.md */
+
+[data-type="markdown"] .metadata-properties {
+  display: grid;
+  grid: auto-flow / 50% 50%;
+  gap: 3px 0px;
+}
+
+[data-type="markdown"] .metadata-properties .metadata-property-value {
+  align-items: start;
+}
+
+body {
+  --metadata-label-width: 5em;
+}

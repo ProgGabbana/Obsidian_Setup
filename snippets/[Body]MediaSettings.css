@@ -170,13 +170,51 @@ img[src*="#locr"],
     margin-top: 0;
 }
 
-.image-captions .image-embed::after,
+/* ---------------------------------------------------------------------- */
+/* CORREZIONE: ANIMAZIONE FLUIDA (TRANSITION E OPACITY) */
+/* ---------------------------------------------------------------------- */
+
+/* 1. Regole di base per la descrizione (invisibile di default) */
+.internal-embed.image-embed::after,
 .image-embed[src*="#cap"]::after {
     content: attr(alt);
-    color: gray;
     display: block;
-    text-align: center;
+    position: absolute;
+    background-color: var(--background-primary);
+    border: 1px solid var(--color-base-30);
+    border-radius: var(--size-2-2);
+    padding: 0.5em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    pointer-events: none;
+    
+    /* MODIFICHE PER L'ANIMAZIONE FLUIDA */
+    opacity: 0; /* Rendi invisibile di default */
+    visibility: hidden; /* Nascondi l'elemento (importante per il flusso) */
+    /* Aggiungi una transizione fluida per l'opacità */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; 
 }
+
+
+/* 2. Il contenitore dell'immagine deve avere position: relative; */
+.internal-embed.image-embed,
+.image-embed[src*="#cap"] {
+  position: relative;
+}
+
+/* 3. Regola Hover (Rendi visibile e opaco al passaggio del mouse) */
+.internal-embed.image-embed:hover::after,
+.image-embed[src*="#cap"]:hover::after {
+    /* Il contenuto è ereditato dalla regola base, ma lo rendiamo visibile */
+    opacity: 1; /* Rendi completamente visibile */
+    visibility: visible; /* Rendi l'elemento visibile */
+}
+
+/* ---------------------------------------------------------------------- */
+/* Regole di seguito restano invariate: */
+/* ---------------------------------------------------------------------- */
 
 .image-embed[src*="#cap"] {
     display: inline-block;

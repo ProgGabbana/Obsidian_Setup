@@ -1,94 +1,33 @@
-/* Source: https://github.com/replete/obsidian-minimal-theme-css-snippets */
+/*
+author: The Useful Walrus
+source: https://discord.com/channels/686053708261228577/702656734631821413/1144209029464342538
+*/
 
-/* Compact style */
-.cm-editor .metadata-container {
-    padding-top:0;
-    padding-bottom:6px;
+.metadata-properties-title {
+  transition: 500ms;
+  opacity: 0.2;
+  pointer-events: none;
+}
+.metadata-container:hover .metadata-properties-title {
+  opacity: 1;
+  color: var(--text-accent);
+  pointer-events: auto;
 }
 
-.cm-editor .metadata-properties-heading {
-    display:none;
+.metadata-content {
+  transition: 200ms cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 0;
+  height: 0;
+  margin-bottom: -1.8em;
+  pointer-events: none;
+}
+.metadata-container:hover .metadata-content {
+  opacity: 1;
+  height: auto;
+  margin-bottom: 0.5em;
+  pointer-events: auto;
 }
 
-/* Autohide on hover for desktop */
-body:not(.is-mobile) {
-    .cm-editor .metadata-container {
-        height:.5em;
-        margin-bottom:0;
-
-        .metadata-content {
-            display:none;
-        }
-
-        &::before {
-            content:'⋯';
-            display:block;
-            position:absolute;
-            height:100%;
-            width:100%;
-            line-height:1em;
-            text-indent:3px;
-            top:-4px;
-            pointer-events:none;
-        }
-        
-        &:is(:hover,:focus-within) {
-            height:auto;
-            background: inherit;
-
-            &::before {
-                display:none;
-            }
-
-            .metadata-content {
-                display:inherit;
-            }   
-        }
-
-    }
-}
-
-/* Hide properties on mobile */
-body:is(.is-mobile) {
-    --metadata-display-editing: none;
-}
-
-/* Properties panel fixes */
-.workspace-leaf-content[data-type=all-properties] {
-
-    .nav-header {
-        padding-top:6px;
-        padding-bottom:0;
-
-        .nav-buttons-container {
-            margin-right:0 !important;
-            padding-left:2px
-        }
-
-        /* correct icon alignment */
-        .clickable-icon svg {
-            transform: translate(-2px,0);
-        }
-
-        .search-input-container {
-            outline:2px solid red;
-
-        }
-    }
-
-    .tree-item {
-        /* fix properties panel item alignment */
-        padding-left: 15px;
-        /* more compact */
-        margin-top:-5px;
-    }
-}
-
-/* Hide banner in hover popover */
-.hover-popover .metadata-container {
-    display:none !important;
-    outline: 2px solid red;
-}
 
 /* ------------------------------------------------------------- */
 /* Added feature: Properties into two columns & label width adjustment */

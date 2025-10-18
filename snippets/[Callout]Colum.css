@@ -50,6 +50,47 @@ body {
     margin: 0; /* Rimuove i margini predefiniti */
 }
 
+/* --------------------------------- */
+/* AGGIUNTA: Altezze Uniformi e Larghezze Flessibili */
+/* --------------------------------- */
+
+/* Aggiunge la capacità ai callout annidati di crescere in altezza (per altezze uniformi) */
+.callout[data-callout="col"] .callout:not([data-callout="col"]) { 
+    display: flex;
+    flex-direction: column; 
+}
+/* Fa in modo che il contenuto interno al callout annidato occupi tutta l'altezza disponibile */
+.callout[data-callout="col"] .callout .callout-content { 
+    flex-grow: 1;
+}
+
+/* Metadato 'min-0' standalone: Permette l'uso di |min-0 per colonne uguali ma totalmente flessibili */
+.callout[data-callout="col"] > .callout-content > div[data-callout-metadata*="min-0"]:not([data-callout-metadata*="wide"]) { 
+    flex-basis: 0; 
+}
+
+/* Metadati 'wide-x': Aumenta il fattore di crescita e IMPOSTA LA BASE A ZERO automaticamente */
+.callout[data-callout="col"] > .callout-content > div[data-callout-metadata*="wide-2"] { 
+    flex-grow: 2; 
+    flex-basis: 0; 
+}
+.callout[data-callout="col"] > .callout-content > div[data-callout-metadata*="wide-3"] { 
+    flex-grow: 3; 
+    flex-basis: 0; 
+}
+.callout[data-callout="col"] > .callout-content > div[data-callout-metadata*="wide-4"] { 
+    flex-grow: 4; 
+    flex-basis: 0; 
+}
+.callout[data-callout="col"] > .callout-content > div[data-callout-metadata*="wide-5"] { 
+    flex-grow: 5; 
+    flex-basis: 0; 
+}
+
+/* --------------------------------- */
+/* Metadata Preesistenti (ctr, no-wrap, menu) */
+/* --------------------------------- */
+
 /* Metadata 'ctr': Centra il contenitore e impedisce agli elementi di crescere */
 .callout[data-callout="col"][data-callout-metadata*="ctr"].callout {
     justify-content: center;

@@ -43,9 +43,10 @@
 /* Ultra Compact Sidebar (NEW FEATURE)
     Source: https://github.com/replete/obsidian-minimal-theme-css-snippets
     Resizes to previous set width on hover, and shrinks to 135px when not hovered.
+    Modificato il tempo di transizione da .1s a .2s per renderlo più fluido e coerente.
 */
 .mod-sidedock.mod-left-split {
-    transition: .1s width ease-in-out;
+    transition: .2s width ease-in-out; /* Modificato: .1s -> .2s */
 
     /* fade sidebar nav icons nicer */
     .sidebar-toggle-button.mod-left {
@@ -57,7 +58,7 @@
     &:not(:is(:hover, :focus-within)) {
         /* sidebar shrinks if not hovered */
         width:135px !important;
-        transition: .1s width ease-in-out;
+        transition: .2s width ease-in-out; /* Modificato: .1s -> .2s */
     }
 }
 

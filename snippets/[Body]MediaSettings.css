@@ -1,126 +1,47 @@
 /*
     Source: https://github.com/SlRvb/Obsidian--ITS-Theme/blob/main/Snippets/S%20-%20Images%20Adjustments.css
-    Modificato per rimuovere il supporto alla sintassi "relative" e la "x" finale dai tag di dimensione.
 */
 
 body {
     /* Variabili di dimensione per le immagini (valori assoluti) */
-    --micro: 70px;
-    --tiny: 100px;
     --small: 200px;
-    --small-med: 300px;
-    --med-small: 400px;
-    --medium: 500px;
-    --med-tall: 600px;
-    --tall: 700px;
+    --medium: 400px;
+    --full: 600px;
 }
 
 .popover.hover-popover {
-    --micro: 70px;
-    --tiny: 100px;
-    --small: 150px;
-    --small-med: 200px;
-    --med-small: 250px;
-    --medium: 300px;
-    --med-tall: 450px;
-    --tall: 500px;
+    --small: 200px;
+    --medium: 400px;
+    --full: 600px;
 }
 
-@media (max-width: 500px) {
-    body {
-        --radius: 0px;
-        --micro: 70px;
-        --tiny: 100px;
-        --small: 150px;
-        --small-med: 200px;
-        --med-small: 250px;
-        --medium: 300px;
-        --med-tall: 450px;
-        --tall: 500px;
-    }
+/* ---------------------------------------------------------------------- */
+/* NUOVI SELETTORI - Applicano SOLO la larghezza (width) - Non ci sono h-tags */
+/* ---------------------------------------------------------------------- */
+
+/* Modifica i selettori: usa solo small, medium, full (senza 'w' o 'h') */
+/* Nota: Stiamo usando un selettore più generico [alt*="small"] ecc. */
+.view-content  img[alt]:is([alt*=small],
+[alt*=medium],
+[alt*=full]) {
+    width: var(--image-adj-size);
+    /* L'altezza viene rimossa o lasciata su 'auto' per mantenere le proporzioni */
+    height: auto;
 }
 
-/* Modifica i selettori: rimuovi la 'x' finale nei tag */
-.view-content  img[alt]:is([alt*=w7],
-[alt*=w10],
-[alt*=w20],
-[alt*=w30],
-[alt*=w40],
-[alt*=w50],
-[alt*=w60],
-[alt*=w70],
-[alt*=wfull]) {
-    width: var(--image-adj-size-w);
+/* Regole per la dimensione - Nuove dimensioni */
+.view-content img[alt][alt*=small] {
+    --image-adj-size: var(--small);
 }
-.view-content img[alt]:is([alt*=h7],
-[alt*=h10],
-[alt*=h20],
-[alt*=h30],
-[alt*=h40],
-[alt*=h50],
-[alt*=h60],
-[alt*=h70],
-[alt*=hfull]) {
-    height: var(--image-adj-size-h);
+.view-content img[alt][alt*=medium] {
+    --image-adj-size: var(--medium);
 }
+.view-content img[alt][alt*=full] {
+    --image-adj-size: var(--full);
+}
+/* Se si vuole usare 'full' per il 100% della larghezza del contenitore: */
+/* .view-content img[alt][alt*=full] { --image-adj-size: 100%; } */
 
-/* Regole per l'altezza (h) - Modifica: Rimosso 'x' */
-.view-content img[alt][alt*=h7] {
-    --image-adj-size-h: var(--micro);
-}
-.view-content img[alt][alt*=h10] {
-    --image-adj-size-h: var(--tiny);
-}
-.view-content img[alt][alt*=h20] {
-    --image-adj-size-h: var(--small);
-}
-.view-content img[alt][alt*=h30] {
-    --image-adj-size-h: var(--small-med);
-}
-.view-content img[alt][alt*=h40] {
-    --image-adj-size-h: var(--med-small);
-}
-.view-content img[alt][alt*=h50] {
-    --image-adj-size-h: var(--medium);
-}
-.view-content img[alt][alt*=h60] {
-    --image-adj-size-h: var(--med-tall);
-}
-.view-content img[alt][alt*=h70] {
-    --image-adj-size-h: var(--tall);
-}
-.view-content img[alt][alt*=hfull] {
-    --image-adj-size-h: 100%;
-}
-
-/* Regole per la larghezza (w) - Modifica: Rimosso 'x' */
-.view-content img[alt][alt*=w7] {
-    --image-adj-size-w: var(--micro);
-}
-.view-content img[alt][alt*=w10] {
-    --image-adj-size-w: var(--tiny);
-}
-.view-content img[alt][alt*=w20] {
-    --image-adj-size-w: var(--small);
-}
-.view-content img[alt][alt*=w30] {
-    --image-adj-size-w: var(--small-med);
-}
-.view-content img[alt][alt*=w40] {
-    --image-adj-size-w: var(--med-small);
-}
-.view-content img[alt][alt*=w50] {
-    --image-adj-size-w: var(--medium);
-}
-.view-content img[alt][alt*=w60] {
-    --image-adj-size-w: var(--med-tall);
-}
-.view-content img[alt][alt*=w70] {
-    --image-adj-size-w: var(--tall);
-}
-.view-content img[alt][alt*=wfull] {
-    --image-adj-size-w: 100%;
-}
 
 .image-embed,
 div:not(.image-embed) > img {
@@ -129,6 +50,7 @@ div:not(.image-embed) > img {
     max-height: 100%;
 }
 
+/* ... (Regole locl/locr rimangono invariate) ... */
 .markdown-rendered img[alt~=locl],
 .markdown-rendered img[src*="#locl"],
 .markdown-rendered .image-embed[alt~=locl],
@@ -171,29 +93,26 @@ img[src*="#locr"],
 }
 
 /* ---------------------------------------------------------------------- */
-/* NUOVE REGOLE PER MOSTRARE LA CAPTION SOTTO L'IMMAGINE ALL'HOVER */
+/* REGOLE PER MOSTRARE LA CAPTION SOTTO L'IMMAGINE ALL'HOVER */
 /* ---------------------------------------------------------------------- */
 
-/* MODIFICA CRITICA: Selettore solo su [src*="#cap"] - Rimosso il selettore .internal-embed.image-embed::after */
 .image-embed[src*="#cap"]::after {
     content: attr(alt);
-    display: none; /* Nascondi di default */
+    display: none;
     text-align: center;
     padding: 5px 0;
     font-size: 0.85em;
     color: var(--text-muted);
-    pointer-events: none; 
+    pointer-events: none;
     opacity: 0;
-    transition: opacity 0.3s ease-in-out; 
+    transition: opacity 0.3s ease-in-out;
 }
 
-/* MODIFICA CRITICA: Selettore solo su [src*="#cap"] - Rimosso il selettore .internal-embed.image-embed:hover::after */
 .image-embed[src*="#cap"]:hover::after {
-    display: block; /* Mostra la caption */
-    opacity: 1; /* Rendi completamente visibile */
+    display: block;
+    opacity: 1;
 }
 
-/* MODIFICA CRITICA: Selettore solo su [src*="#cap"] - Rimosso il selettore .internal-embed.image-embed */
 .image-embed[src*="#cap"] {
     display: inline-block;
     position: relative;
@@ -203,27 +122,24 @@ img[src*="#locr"],
     float: unset ;
 }
 
-/* Regole per didascalie - Modifica: Rimosso 'x' */
-/* Questi selettori contengono già #cap, quindi sono corretti */
-.image-embed[src*="#cap"][src*="#h7"] img { height: var(--micro); }
-.image-embed[src*="#cap"][src*="#h10"] img { height: var(--tiny); }
-.image-embed[src*="#cap"][src*="#h20"] img { height: var(--small); }
-.image-embed[src*="#cap"][src*="#h30"] img { height: var(--small-med); }
-.image-embed[src*="#cap"][src*="#h40"] img { height: var(--med-small); }
-.image-embed[src*="#cap"][src*="#h50"] img { height: var(--medium); }
-.image-embed[src*="#cap"][src*="#h60"] img { height: var(--med-tall); }
-.image-embed[src*="#cap"][src*="#h70"] img { height: var(--tall); }
-.image-embed[src*="#cap"][src*="#hfull"] img { height: 100%; }
+/* Regole per didascalie (solo larghezza) - Nuove dimensioni */
+/* Applichiamo la dimensione al contenitore e all'immagine interna. */
+/* NOTA: Abbiamo rimosso i selettori [src*="#h..."] e [src*="#w..."] */
+.image-embed[src*="#cap"][src*="#small"], .image-embed[src*="#cap"][src*="#small"] img {
+    width: var(--small);
+    height: auto; /* Aggiunto per evitare che l'altezza sia fissata */
+}
+.image-embed[src*="#cap"][src*="#medium"], .image-embed[src*="#cap"][src*="#medium"] img {
+    width: var(--medium);
+    height: auto;
+}
+.image-embed[src*="#cap"][src*="#full"], .image-embed[src*="#cap"][src*="#full"] img {
+    width: var(--full);
+    height: auto;
+}
+/* Se si vuole usare 'full' per il 100% della larghezza del contenitore: */
+/* .image-embed[src*="#cap"][src*="#full"], .image-embed[src*="#cap"][src*="#full"] img { width: 100%; height: auto; } */
 
-.image-embed[src*="#cap"][src*="#w7"], .image-embed[src*="#cap"][src*="#w7"] img { width: var(--micro); }
-.image-embed[src*="#cap"][src*="#w10"], .image-embed[src*="#cap"][src*="#w10"] img { width: var(--tiny); }
-.image-embed[src*="#cap"][src*="#w20"], .image-embed[src*="#cap"][src*="#w20"] img { width: var(--small); }
-.image-embed[src*="#cap"][src*="#w30"], .image-embed[src*="#cap"][src*="#w30"] img { width: var(--small-med); }
-.image-embed[src*="#cap"][src*="#w40"], .image-embed[src*="#cap"][src*="#w40"] img { width: var(--med-small); }
-.image-embed[src*="#cap"][src*="#w50"], .image-embed[src*="#cap"][src*="#w50"] img { width: var(--medium); }
-    .image-embed[src*="#cap"][src*="#w60"], .image-embed[src*="#cap"][src*="#w60"] img { width: var(--med-tall); }
-    .image-embed[src*="#cap"][src*="#w70"], .image-embed[src*="#cap"][src*="#w70"] img { width: var(--tall); }
-    .image-embed[src*="#cap"][src*="#wfull"], .image-embed[src*="#cap"][src*="#wfull"] img { width: 100%; }
 
 .mobile-image-viewer img[alt] {
     height: 100%;
@@ -231,13 +147,7 @@ img[src*="#locr"],
     object-fit: contain;
 }
 
-/* ---------------------------------------------------------------------- */
-/* FUNZIONALITA' AGGIUNTA: Zoom-in/Zoom-out al click e al mantenimento della pressione (50% zoom) */
-/*
-author: Kepano
-source: https://forum.obsidian.md/t/image-zoom-click-hold-to-expand-images/5164?u
-*/
-
+/* ... (Regole per lo Zoom rimangono invariate) ... */
 .view-content img {
     max-width: 100%;
     cursor: zoom-in;
@@ -247,14 +157,13 @@ source: https://forum.obsidian.md/t/image-zoom-click-hold-to-expand-images/5164?
     cursor: zoom-out;
 }
 
-/* MODIFICA: Il contenitore :active copre l'intera viewport */
 .view-content .markdown-preview-view img[referrerpolicy="no-referrer"]:active,
 .view-content .image-embed:active {
     background: var(--background-primary);
     cursor: zoom-out;
     display: block;
     z-index: 200;
-    position: fixed; /* Fissa alla viewport */
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -269,26 +178,23 @@ source: https://forum.obsidian.md/t/image-zoom-click-hold-to-expand-images/5164?
     padding: 0;
 }
 
-/* Regola aggiunta/modificata per nascondere la caption quando l'immagine è in zoom (:active) */
-/* MODIFICA CRITICA: Selettore solo su [src*="#cap"] - Rimosso il selettore .internal-embed.image-embed:active::after */
 .image-embed[src*="#cap"]:active::after {
     display: none;
     opacity: 0;
 }
 
-/* MODIFICA: L'immagine interna viene ridimensionata al 50% della viewport e centrata */
 .view-content .image-embed:active img {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centra l'immagine */
+    transform: translate(-50%, -50%);
     padding: 0;
     margin: 0;
-    width: 50vw; /* 50% della larghezza della viewport */
-    height: 50vh; /* 50% dell'altezza della viewport */
+    width: 50vw;
+    height: 50vh;
     max-height: 50vh;
     max-width: 50vw;
     object-fit: contain;
-    position: fixed; /* Fissa l'immagine all'interno del contenitore fisso */
+    position: fixed;
     opacity: 1;
-    z-index: 201; /* Assicura che sia sopra il contenitore padre */
+    z-index: 201;
 }

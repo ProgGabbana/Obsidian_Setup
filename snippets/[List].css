@@ -1,0 +1,120 @@
+/* Source: https://github.com/efemkay/obsidian-modular-css-layout/tree/main */
+
+body{
+	/* Variabili globali mantenute */
+	--list-min-width: 200px;
+	--col-rule-color: var(--background-modifier-border);
+	--col-rule-width: 1px;
+	--list-grid-min-width: 250px;
+	--list-grid-wide-min-width: 350px;
+
+	/* Variabili per le card modificate */
+	--card-header-border-width: 1px;
+	--card-bg-color: var(--background-secondary);
+	--card-gap: 0.2em;
+	--card-border-width: 1px;
+	--card-border-color: var(--background-modifier-border);
+}
+
+/* === Modifiche ai Tag e Classi (List Column e List Card) === */
+
+	/* Nascondi il tag breve (set/list e set/card) in modalità visualizzazione, rendi meno visibile in modalità modifica */
+	:is(div[class*="set"].markdown-rendered, .markdown-rendered) a[href*="#set"] {display: none;} /* Modificato: mcl -> set */
+	.cm-s-obsidian .HyperMD-list-line span[class*="set"] {background-color: var(--background-primary) !important; color: var(--text-faint); font-size: 0.9rem; } /* Modificato: mcl -> set */
+
+
+/* === List Column (Tag: #list) ===*/
+
+	/* List Column Using Tag (utilizzando CSS :has()) -- NUOVI TAG: #set/list */
+	ul:has(> li > [data-heading] > [href*="#set/list"]), /* Modificato: mcl -> set */
+	ul:has(> li > [href*="#set/list"]) { /* Modificato: mcl -> set */
+		margin-top: 0;
+		column-width: var(--list-min-width); column-gap: 1rem;
+		column-rule: var(--col-rule-width) solid var(--col-rule-color);
+	}
+
+	/* Dai un margine per il div, solo per la prima ul */
+	div:has(> ul > li > [href*="#set/list"]), /* Modificato: mcl -> set */
+	div:has(> ul > li > [data-heading] > [href*="#set/list"]) /* Modificato: mcl -> set */
+		{ margin-top: 0.8em; }
+
+	/* Regola [!blank] display contents */
+	div[data-callout*="blank"] > .callout-content:has(li [href*="#set/list"]) {display: block; margin: 0; padding: 0; } /* Modificato: mcl -> set */
+
+
+	/* -- List Column usando YAML cssclass e Markdown Attributes (blocco e non solo) -- */
+	/* Nessuna modifica qui: continuano a funzionare con i loro nomi */
+	.two-column-list div > ul,   .two-column-list-block,
+	.three-column-list div > ul,  .three-column-list-block,
+	.four-column-list div > ul,  .four-column-list-block,
+	.multi-column-list div > ul,  .multi-column-list-block
+		{ column-gap: 3rem; column-rule: var(--col-rule-width) solid var(--col-rule-color); }
+	@media (min-width: 500px ){
+		.two-column-list div > ul,   .two-column-list-block {columns: 2; }
+		.three-column-list div > ul,  .three-column-list-block {columns: 3; }
+		.four-column-list div > ul,  .four-column-list-block {columns: 4; }
+	}
+	.multi-column-list div > ul,  .multi-column-list-block { column-width: var(--list-min-width); }
+	.footnotes [class$="-column-list-block"] li:last-of-type br:last-of-type {display: none;}
+
+	/* -- General Adjustment for List Column (Aggiornato per supportare #list) -- */
+	/* Correzione del bullet (hack) - include il nuovo tag */
+	ul:has([href*="#set/list"]) li > .list-bullet::after, /* Modificato: mcl -> set */
+	.markdown-preview-view[class*="column-list"] li > .list-bullet::after, /* yaml cssclass */
+	.tag-setlist ul li > .list-bullet::after, /* Modificato: mcllist -> setlist */
+	ul[class*="column-list"] li > .list-bullet::after /* markdown attributes */
+		{ position: relative; }
+
+	/* Special Adjustment for Plugins for List Column (Aggiornato per supportare #list) */
+	div.cc-container:has(li > [href*="#set/list"]) { width: 100%; } /* Modificato: mcl -> set */
+
+
+/* ---------------------------------------------------------------------------------------------------------------------- */
+
+/* === List Card (Tag: #card) === */
+
+	/* -- Codice Principale (Aggiornato per supportare #card e #card-wide) -- */
+
+	/* Griglia, rimuovi padding ul (Tag #set/card) */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), [class*="setlist-card"]) ul:first-child { display: grid; grid-template-columns: repeat(auto-fit,minmax(var(--list-grid-min-width),1fr)); margin-block-start: 0.5em; } /* Modificato: mcl -> set, mcllist-card -> setlist-card */
+	/* Griglia, rimuovi padding ul (Tag #set/card-wide) */
+	:is(div:has(> ul [data-heading*="#set/card-wide"]), [class*="setlist-card-wide"]) ul:first-child { grid-template-columns: repeat(auto-fit, minmax(var(--list-grid-wide-min-width),1fr));} /* Modificato: mcl -> set, mcllist-card-wide -> setlist-card-wide */
+
+	/* Rimuovi rientro per il bullet di primo livello (supporto per #set/card) */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) ul ul:not(ul ul ul) { padding-left: 0.1em; } /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) ul ul:not(ul ul ul) > li { margin-inline-start: 0; } /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), div:has(> ul [data-heading*="#set/card"]) .callout-content, .tag-setlist-card, .tag-setlist-card .callout-content) > ul { padding-left: 0; } /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(.is-mobile .markdown-preview-section) :is(div:has([data-heading*="#set/list-card"]), .tag-setlist-card) :is(ol:not(ol ol ol),  ul:not(ul ul ul)) {padding-left: 0;} /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+
+	/* Riposiziona l'indicatore di collasso e il comportamento hover (supporto per #set/card) */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), div:has(> ul [data-heading*="#set/card"]) .callout-content, .tag-setlist-card, .tag-setlist-card .callout-content) > ul > li {position: relative;} /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), div:has(> ul [data-heading*="#set/card"]) .callout-content, .tag-setlist-card, .tag-setlist-card .callout-content) > ul > li:hover > .collapse-indicator, /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), div:has(> ul [data-heading*="#set/card"]) .callout-content, .tag-setlist-card, .tag-setlist-card .callout-content) > ul > li > ul > li:hover > .collapse-indicator {opacity: 1;} /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), div:has(> ul [data-heading*="#set/card"]) .callout-content, .tag-setlist-card, .tag-setlist-card .callout-content) > ul > li > .collapse-indicator, /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), div:has(> ul [data-heading*="#set/card"]) .callout-content, .tag-setlist-card, .tag-setlist-card .callout-content) > ul > li > ul > li > .collapse-indicator {position: absolute; right: 0.7em; padding-right: 0;} /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) ul::before {display: none;} /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+
+	/* Decora la prima intestazione per le card (supporto per #set/card) */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [data-heading*="#set/card"]) .callout-content, .tag-setlist-card, .tag-setlist-card .callout-content) > ul > li:not(.is-collapsed) > [data-heading] {border-bottom: var(--card-header-border-width) solid var(--card-border-color); margin-bottom: 0.2em;} /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+
+	/* Nascondi il bullet di lista per card per il primo e secondo livello (supporto per #set/card) */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) > div > div > ul > li > .list-bullet::after, /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) > div > div > ul > li > ul > li > .list-bullet::after, /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) > ul > li::before, /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) > ul > li > ul > li::before, /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) > ul > li > .list-bullet::after, /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) > ul > li > ul > li > .list-bullet::after {visibility: hidden;} /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+
+	/* Rimuovi la guida di indentazione (supporto per #set/card) */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) ul:not(ul ul ul ul)::before {--indentation-guide-width: 0;} /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	.markdown-rendered.show-indentation-guide :is(div:has(> ul [data-heading*="#set/card"]), .tag-setlist-card) li > ul::before, /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	.markdown-rendered.show-indentation-guide :is(div:has(> ul [data-heading*="#set/card"]), .tag-setlist-card) li > ol::before {border-right: 0; border-left: 0; } /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) li {list-style: none;} /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) li li li {list-style: circle;} /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+
+	/* Stile Card (supporto per #set/card) */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) .callout ul:not(ul ul) > li, /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) ul:not(ul ul) > li /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+		{ margin-inline: var(--card-gap); margin-bottom: calc(var(--card-gap)*2); padding: 0.3em 0.5em; outline: var(--card-border-width) solid var(--card-border-color); border-radius: 0.5em; background-color: var(--card-bg-color);}
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) ul:not(ul ul) > li img {width: 100%;} /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */
+	:is(div:has(> ul [data-heading*="#set/card"]), div:has(> ul [href*="#set/card"]), .tag-setlist-card) ul img {margin: 0; float: none;} /* Modificato: mcl -> set, tag-mcllist-card -> tag-setlist-card */

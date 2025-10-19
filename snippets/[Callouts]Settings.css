@@ -1,0 +1,37 @@
+:root {
+    --width: 50%; /* Larghezza di base impostata al 50% */
+    --outside-padding: 20px;
+}
+
+/* Stile per posizionare il callout a destra */
+.callout[data-callout-metadata*="locr"] {
+    float: right;
+    width: var(--width);
+    margin-left: var(--outside-padding);
+}
+
+/* Stile per posizionare il callout a sinistra */
+.callout[data-callout-metadata*="locl"] {
+    float: left;
+    width: var(--width);
+    margin-right: var(--outside-padding);
+}
+
+/* --------------------------------- */
+/* AGGIUNTA: Metadati 'width-x' per Larghezze Personalizzate (Float Layout) */
+/* --------------------------------- */
+
+/* Metadato 'width-40': Sovrascrive la larghezza impostandola al 40% */
+.callout[data-callout-metadata*="w-40"] {
+    --width: 40%;
+}
+
+/* Metadato 'width-60': Sovrascrive la larghezza impostandola al 60% */
+.callout[data-callout-metadata*="w-60"] {
+    --width: 60%;
+}
+
+/* Metadato 'width-80': Sovrascrive la larghezza impostandola al 80% */
+.callout[data-callout-metadata*="w-80"] {
+    --width: 80%;
+}

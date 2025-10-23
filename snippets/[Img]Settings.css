@@ -5,13 +5,15 @@
 body {
     /* Variabili di dimensione per le immagini (valori assoluti) */
     --small: 200px;
-    --medium: 400px;
+    --medium: 300px;
+    --large: 400px;
     --full: 600px;
 }
 
 .popover.hover-popover {
     --small: 200px;
-    --medium: 400px;
+    --medium: 300px;
+    --large: 400px;
     --full: 600px;
 }
 
@@ -23,6 +25,7 @@ body {
 /* Nota: Stiamo usando un selettore più generico [alt*="small"] ecc. */
 .view-content  img[alt]:is([alt*=small],
 [alt*=medium],
+[alt*=large],
 [alt*=full]) {
     width: var(--image-adj-size);
     /* L'altezza viene rimossa o lasciata su 'auto' per mantenere le proporzioni */
@@ -35,6 +38,9 @@ body {
 }
 .view-content img[alt][alt*=medium] {
     --image-adj-size: var(--medium);
+}
+.view-content img[alt][alt*=large] {
+    --image-adj-size: var(--large);
 }
 .view-content img[alt][alt*=full] {
     --image-adj-size: var(--full);
@@ -133,6 +139,9 @@ img[src*="#locr"],
     width: var(--medium);
     height: auto;
 }
+.image-embed[src*="#cap"][src*="#large"], .image-embed[src*="#cap"][src*="#large"] img {
+    width: var(--large);
+}  
 .image-embed[src*="#cap"][src*="#full"], .image-embed[src*="#cap"][src*="#full"] img {
     width: var(--full);
     height: auto;

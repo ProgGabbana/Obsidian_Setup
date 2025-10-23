@@ -99,31 +99,45 @@ img[src*="#locr"],
 }
 
 /* ---------------------------------------------------------------------- */
-/* REGOLE PER MOSTRARE LA CAPTION SOTTO L'IMMAGINE ALL'HOVER */
+/* REGOLE PER MOSTRARE LA CAPTION CENTRATA ALL'HOVER (MODIFICATE) */
 /* ---------------------------------------------------------------------- */
 
-.image-embed[src*="#cap"]::after {
-    content: attr(alt);
-    display: none;
-    text-align: center;
-    padding: 5px 0;
-    font-size: 0.85em;
-    color: var(--text-muted);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+.image-embed[src*="#cap"] {
+    position: relative;
+    display: inline-block; /* Importante per contenere l'immagine e l'overlay */
 }
 
+/* Stile e Posizionamento della Didascalia */
+.image-embed[src*="#cap"]::after {
+    content: attr(alt);
+    display: none; /* Nascosto di default */
+    position: absolute;
+    /* Stili del box */
+    background-color: var(--background-primary);
+    border: 1px solid var(--color-base-30, #ccc); 
+    border-radius: var(--size-2-2, 4px);
+    padding: 0.5em;
+    max-width: 90%; /* Limita la larghezza */
+    text-align: center;
+    color: var(--text-normal);
+    z-index: 10;
+    /* Centratura */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Transizione e interazione */
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none; /* Permette il click sull'immagine sottostante */
+}
+
+/* Mostra la Didascalia all'Hover */
 .image-embed[src*="#cap"]:hover::after {
     display: block;
     opacity: 1;
 }
 
-.image-embed[src*="#cap"] {
-    display: inline-block;
-    position: relative;
-}
-
+/* Regola per l'immagine all'interno del contenitore, per eliminare il float */
 .image-embed[src*="#cap"] img {
     float: unset ;
 }
@@ -133,7 +147,7 @@ img[src*="#locr"],
 /* NOTA: Abbiamo rimosso i selettori [src*="#h..."] e [src*="#w..."] */
 .image-embed[src*="#cap"][src*="#small"], .image-embed[src*="#cap"][src*="#small"] img {
     width: var(--small);
-    height: auto; /* Aggiunto per evitare che l'altezza sia fissata */
+    height: auto; 
 }
 .image-embed[src*="#cap"][src*="#medium"], .image-embed[src*="#cap"][src*="#medium"] img {
     width: var(--medium);
@@ -141,6 +155,7 @@ img[src*="#locr"],
 }
 .image-embed[src*="#cap"][src*="#large"], .image-embed[src*="#cap"][src*="#large"] img {
     width: var(--large);
+    height: auto;
 }  
 .image-embed[src*="#cap"][src*="#full"], .image-embed[src*="#cap"][src*="#full"] img {
     width: var(--full);

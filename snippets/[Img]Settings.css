@@ -4,43 +4,48 @@
 
 body {
     /* Variabili di dimensione per le immagini (valori assoluti) */
-    --small: 200px;
-    --medium: 400px;
-    --full: 600px;
+    --s: 200px;  /* Corrisponde alla vecchia 'small' */
+    --m: 300px;  /* NUOVA dimensione intermedia */
+    --l: 400px;  /* Corrisponde alla vecchia 'medium' */
+    --xl: 600px; /* Corrisponde alla vecchia 'full' */
 }
 
 .popover.hover-popover {
-    --small: 200px;
-    --medium: 400px;
-    --full: 600px;
+    --s: 200px;
+    --m: 300px;
+    --l: 400px;
+    --xl: 600px;
 }
 
 /* ---------------------------------------------------------------------- */
 /* NUOVI SELETTORI - Applicano SOLO la larghezza (width) - Non ci sono h-tags */
 /* ---------------------------------------------------------------------- */
 
-/* Modifica i selettori: usa solo small, medium, full (senza 'w' o 'h') */
-/* Nota: Stiamo usando un selettore più generico [alt*="small"] ecc. */
-.view-content  img[alt]:is([alt*=small],
-[alt*=medium],
-[alt*=full]) {
+/* Modifica i selettori: usa solo s, m, l, xl (senza 'w' o 'h') */
+.view-content  img[alt]:is([alt*=s],
+[alt*=m],
+[alt*=l],
+[alt*=xl]) {
     width: var(--image-adj-size);
     /* L'altezza viene rimossa o lasciata su 'auto' per mantenere le proporzioni */
     height: auto;
 }
 
-/* Regole per la dimensione - Nuove dimensioni */
-.view-content img[alt][alt*=small] {
-    --image-adj-size: var(--small);
+/* Regole per la dimensione - Nuove dimensioni (alt text) */
+.view-content img[alt][alt*=s] {
+    --image-adj-size: var(--s);
 }
-.view-content img[alt][alt*=medium] {
-    --image-adj-size: var(--medium);
+.view-content img[alt][alt*=m] {
+    --image-adj-size: var(--m);
 }
-.view-content img[alt][alt*=full] {
-    --image-adj-size: var(--full);
+.view-content img[alt][alt*=l] {
+    --image-adj-size: var(--l);
 }
-/* Se si vuole usare 'full' per il 100% della larghezza del contenitore: */
-/* .view-content img[alt][alt*=full] { --image-adj-size: 100%; } */
+.view-content img[alt][alt*=xl] {
+    --image-adj-size: var(--xl);
+}
+/* Se si vuole usare 'xl' per il 100% della larghezza del contenitore: */
+/* .view-content img[alt][alt*=xl] { --image-adj-size: 100%; } */
 
 
 .image-embed,
@@ -122,23 +127,27 @@ img[src*="#locr"],
     float: unset ;
 }
 
-/* Regole per didascalie (solo larghezza) - Nuove dimensioni */
+/* Regole per didascalie (solo larghezza) - Nuove dimensioni (src hash) */
 /* Applichiamo la dimensione al contenitore e all'immagine interna. */
 /* NOTA: Abbiamo rimosso i selettori [src*="#h..."] e [src*="#w..."] */
-.image-embed[src*="#cap"][src*="#small"], .image-embed[src*="#cap"][src*="#small"] img {
-    width: var(--small);
-    height: auto; /* Aggiunto per evitare che l'altezza sia fissata */
-}
-.image-embed[src*="#cap"][src*="#medium"], .image-embed[src*="#cap"][src*="#medium"] img {
-    width: var(--medium);
+.image-embed[src*="#cap"][src*="#s"], .image-embed[src*="#cap"][src*="#s"] img {
+    width: var(--s);
     height: auto;
 }
-.image-embed[src*="#cap"][src*="#full"], .image-embed[src*="#cap"][src*="#full"] img {
-    width: var(--full);
+.image-embed[src*="#cap"][src*="#m"], .image-embed[src*="#cap"][src*="#m"] img {
+    width: var(--m);
     height: auto;
 }
-/* Se si vuole usare 'full' per il 100% della larghezza del contenitore: */
-/* .image-embed[src*="#cap"][src*="#full"], .image-embed[src*="#cap"][src*="#full"] img { width: 100%; height: auto; } */
+.image-embed[src*="#cap"][src*="#l"], .image-embed[src*="#cap"][src*="#l"] img {
+    width: var(--l);
+    height: auto;
+}
+.image-embed[src*="#cap"][src*="#xl"], .image-embed[src*="#cap"][src*="#xl"] img {
+    width: var(--xl);
+    height: auto;
+}
+/* Se si vuole usare 'xl' per il 100% della larghezza del contenitore: */
+/* .image-embed[src*="#cap"][src*="#xl"], .image-embed[src*="#cap"][src*="#xl"] img { width: 100%; height: auto; } */
 
 
 .mobile-image-viewer img[alt] {
